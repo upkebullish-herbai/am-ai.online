@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AMAI — AI-oplossingen voor bedrijven</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav" id="nav">
+  <div class="container nav__inner">
+    <div class="nav__logo">AM<em>AI</em></div>
+    <ul class="nav__links">
+      <li><a href="#diensten" class="nav__link">Diensten</a></li>
+      <li><a href="#voor-wie" class="nav__link">Voor wie</a></li>
+      <li><a href="#hoe" class="nav__link">Hoe het werkt</a></li>
+      <li><a href="#contact" class="nav__cta">Gratis gesprek</a></li>
+    </ul>
+    <div class="nav__hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#diensten" onclick="closeMobile()">Diensten</a>
+  <a href="#voor-wie" onclick="closeMobile()">Voor wie</a>
+  <a href="#hoe" onclick="closeMobile()">Hoe het werkt</a>
+  <a href="#contact" class="nav__cta" onclick="closeMobile()">Gratis gesprek</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero__glow hero__glow--1"></div>
+  <div class="hero__glow hero__glow--2"></div>
+  <div class="container">
+    <div class="hero__content">
+      <div class="hero__badge">AI-bureau voor het Nederlandse bedrijfsleven</div>
+      <h1 class="hero__title">
+        Jouw bedrijf klaar<br>
+        <span class="text-gradient">voor de AI-revolutie</span>
+      </h1>
+      <p class="hero__sub">
+        Van automatisering tot ERP-koppelingen, van websites tot maatwerkoplossingen — wij bouwen AI in jouw bedrijf. Praktisch, snel en zonder technisch gedoe.
+      </p>
+      <div class="hero__actions">
+        <a href="#contact" class="btn btn--primary">Plan gratis kennismaking ↗</a>
+        <a href="#diensten" class="btn btn--outline">Bekijk onze diensten →</a>
+      </div>
+      <div class="hero__stats">
+        <div>
+          <div class="stat-num text-gradient">5+</div>
+          <div class="stat-label">Diensten</div>
+        </div>
+        <div>
+          <div class="stat-num text-gradient">100%</div>
+          <div class="stat-label">Maatwerk</div>
+        </div>
+        <div>
+          <div class="stat-num text-gradient">MKB</div>
+          <div class="stat-label">Gefocust op jou</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- DIENSTEN -->
+<section class="section" id="diensten">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Diensten</span>
+      <h2>Wat wij voor jou bouwen</h2>
+      <p>Van eerste idee tot werkende oplossing — wij nemen alles uit handen zodat jij je kunt focussen op je bedrijf.</p>
+    </div>
+    <div class="modules-grid">
+
+      <div class="module-card module-card--1 reveal reveal-delay-1">
+        <div class="module-card__icon">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>
+          </svg>
+        </div>
+        <div class="module-card__tag">Kennisoverdracht</div>
+        <h3>AI Educatie</h3>
+        <p>Wij trainen jouw team zodat ze AI écht begrijpen en direct kunnen toepassen — van medewerkers tot directie.</p>
+        <ul class="module-card__list">
+          <li>Workshops op locatie</li>
+          <li>AI-tools leren gebruiken</li>
+          <li>Strategische sessies directie</li>
+        </ul>
+      </div>
+
+      <div class="module-card module-card--2 reveal reveal-delay-2">
+        <div class="module-card__icon">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#FF6B6B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><circle cx="17" cy="8" r="1.5" fill="#FF6B6B"/>
+          </svg>
+        </div>
+        <div class="module-card__tag">Online aanwezigheid</div>
+        <h3>Websites & webapps</h3>
+        <p>Moderne, snelle websites en webapplicaties die bezoekers omzetten in klanten — gebouwd met de nieuwste technologie.</p>
+        <ul class="module-card__list">
+          <li>Landingspagina's & bedrijfssites</li>
+          <li>Webapplicaties op maat</li>
+          <li>SEO & performance</li>
+        </ul>
+      </div>
+
+      <div class="module-card module-card--3 reveal reveal-delay-3">
+        <div class="module-card__icon">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#2563EB" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+          </svg>
+        </div>
+        <div class="module-card__tag">Tijdsbesparing</div>
+        <h3>Automatiseringen</h3>
+        <p>Handmatige processen die nu uren kosten, laten we in minuten uitvoeren. Van e-mailflows tot dataverwerking.</p>
+        <ul class="module-card__list">
+          <li>Workflow automatisering</li>
+          <li>AI-chatbots & assistenten</li>
+          <li>Rapportages & dashboards</li>
+        </ul>
+      </div>
+
+      <div class="module-card module-card--4 reveal reveal-delay-1">
+        <div class="module-card__icon">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+          </svg>
+        </div>
+        <div class="module-card__tag">Maatwerk</div>
+        <h3>Software oplossingen</h3>
+        <p>Geen standaardpakket dat half past — wij bouwen software die precies doet wat jouw bedrijf nodig heeft.</p>
+        <ul class="module-card__list">
+          <li>Interne tools & portals</li>
+          <li>API-integraties</li>
+          <li>Data-analyse & AI-modellen</li>
+        </ul>
+      </div>
+
+      <div class="module-card module-card--5 reveal reveal-delay-2">
+        <div class="module-card__icon">
+          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#7C3AED" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/>
+          </svg>
+        </div>
+        <div class="module-card__tag">Industrie & productie</div>
+        <h3>ERP & machine koppelingen</h3>
+        <p>Jouw ERP-systeem, machines en productielijn slim met elkaar verbonden. Real-time data, minder fouten, meer grip.</p>
+        <ul class="module-card__list">
+          <li>ERP-integraties (SAP, AFAS, Exact)</li>
+          <li>Machine- & sensordata uitlezen</li>
+          <li>Productie dashboards</li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- VOOR WIE -->
+<section class="section for-who" id="voor-wie">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Voor wie</span>
+      <h2>Wij werken voor elk type bedrijf</h2>
+      <p>Of je nu een klein bedrijf runt of een productiebedrijf beheert — wij schalen mee met jouw vraag.</p>
+    </div>
+    <div class="for-who__grid">
+      <div class="for-who__card reveal reveal-delay-1">
+        <div class="for-who__icon">
+          <svg width="44" height="44" viewBox="0 0 100 100" fill="none"><path d="M20,20 L39,20 C39,20 39,6 50,6 C61,6 61,20 61,20 L80,20 L80,39 C80,39 66,39 66,50 C66,61 80,61 80,61 L80,80 L61,80 C61,80 61,66 50,66 C39,66 39,80 39,80 L20,80 L20,61 C20,61 34,61 34,50 C34,39 20,39 20,39 Z" fill="#10B981" fill-opacity="0.22" stroke="#10B981" stroke-width="3" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>MKB & ondernemers</h3>
+        <p>Meer doen met minder mensen. Wij automatiseren processen en bouwen tools zodat jij je kunt richten op groei.</p>
+      </div>
+      <div class="for-who__card reveal reveal-delay-2">
+        <div class="for-who__icon">
+          <svg width="44" height="44" viewBox="0 0 100 100" fill="none"><path d="M20,20 L39,20 C39,20 39,34 50,34 C61,34 61,20 61,20 L80,20 L80,39 C80,39 94,39 94,50 C94,61 80,61 80,61 L80,80 L61,80 C61,80 61,94 50,94 C39,94 39,80 39,80 L20,80 L20,61 C20,61 6,61 6,50 C6,39 20,39 20,39 Z" fill="#2563EB" fill-opacity="0.22" stroke="#2563EB" stroke-width="3" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Productiebedrijven</h3>
+        <p>Machines koppelen aan je ERP, real-time inzicht in je productielijn en slimmere planning — wij maken het mogelijk.</p>
+      </div>
+      <div class="for-who__card reveal reveal-delay-3">
+        <div class="for-who__icon">
+          <svg width="44" height="44" viewBox="0 0 100 100" fill="none"><path d="M20,20 L39,20 C39,20 39,6 50,6 C61,6 61,20 61,20 L80,20 L80,39 C80,39 94,39 94,50 C94,61 80,61 80,61 L80,80 L61,80 C61,80 61,66 50,66 C39,66 39,80 39,80 L20,80 L20,61 C20,61 6,61 6,50 C6,39 20,39 20,39 Z" fill="#F59E0B" fill-opacity="0.22" stroke="#F59E0B" stroke-width="3" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Scholen & instellingen</h3>
+        <p>AI-educatie voor leerlingen, docenten en directie. Praktische workshops die direct toepasbaar zijn in de klas.</p>
+      </div>
+      <div class="for-who__card reveal reveal-delay-4">
+        <div class="for-who__icon">
+          <svg width="44" height="44" viewBox="0 0 100 100" fill="none"><path d="M20,20 L39,20 C39,20 39,34 50,34 C61,34 61,20 61,20 L80,20 L80,39 C80,39 66,39 66,50 C66,61 80,61 80,61 L80,80 L61,80 C61,80 61,94 50,94 C39,94 39,80 39,80 L20,80 L20,61 C20,61 6,61 6,50 C6,39 20,39 20,39 Z" fill="#7C3AED" fill-opacity="0.22" stroke="#7C3AED" stroke-width="3" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Startups & scale-ups</h3>
+        <p>Snel schalen met de juiste technologie. Wij bouwen mee als technische partner zonder dat je een heel dev-team nodig hebt.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section how" id="hoe">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Hoe het werkt</span>
+      <h2>Van idee tot resultaat</h2>
+      <p>Eenvoudig, snel en zonder gedoe. Wij regelen alles zodat jij je kunt focussen op je bedrijf.</p>
+    </div>
+    <div class="how__steps">
+      <div class="how__step reveal reveal-delay-1">
+        <div class="how__step-num">1</div>
+        <h3>Kennismaken</h3>
+        <p>Gratis gesprek van 30 minuten. We leren jouw bedrijf kennen en begrijpen waar de uitdagingen zitten.</p>
+      </div>
+      <div class="how__step reveal reveal-delay-2">
+        <div class="how__step-num">2</div>
+        <h3>Voorstel op maat</h3>
+        <p>Binnen 2 werkdagen ontvang je een helder voorstel met aanpak, tijdlijn en prijs — geen verrassingen.</p>
+      </div>
+      <div class="how__step reveal reveal-delay-3">
+        <div class="how__step-num">3</div>
+        <h3>Bouwen & leveren</h3>
+        <p>We gaan aan de slag. Je bent altijd op de hoogte van de voortgang en kunt bijsturen waar nodig.</p>
+      </div>
+      <div class="how__step reveal reveal-delay-4">
+        <div class="how__step-num">4</div>
+        <h3>Doorgroeien</h3>
+        <p>Na oplevering blijven we beschikbaar voor onderhoud, doorontwikkeling en nieuwe uitdagingen.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA STRIP -->
+<section style="padding: 5rem 0; background: linear-gradient(135deg, rgba(37,99,235,0.08) 0%, rgba(124,58,237,0.06) 100%); border-top: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border);">
+  <div class="container">
+    <div style="text-align:center; max-width: 600px; margin: 0 auto;" class="reveal">
+      <span class="eyebrow">Klaar om te beginnen?</span>
+      <h2 style="font-size: clamp(1.75rem, 3vw, 2.5rem); margin-bottom: 1rem;">Eén gesprek kan alles veranderen</h2>
+      <p style="color: var(--color-muted); font-size: 1.1rem; margin-bottom: 2rem; line-height: 1.7;">Geen verplichtingen. Geen technisch jargon. Gewoon een eerlijk gesprek over wat AI voor jouw bedrijf kan betekenen.</p>
+      <a href="#contact" class="btn btn--primary">Plan gratis kennismakingsgesprek ↗</a>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact-section" id="contact">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Contact</span>
+      <h2>Gratis kennismaken?</h2>
+      <p>Vertel ons over jouw bedrijf en we plannen een vrijblijvend gesprek van 30 minuten.</p>
+    </div>
+    <div class="contact-form reveal">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Naam</label>
+          <input type="text" placeholder="Jan de Vries">
+        </div>
+        <div class="form-group">
+          <label>Bedrijf</label>
+          <input type="text" placeholder="Naam van je bedrijf">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>E-mailadres</label>
+        <input type="email" placeholder="jan@bedrijf.nl">
+      </div>
+      <div class="form-group">
+        <label>Interesse in</label>
+        <select>
+          <option value="">Kies een dienst...</option>
+          <option>AI Educatie</option>
+          <option>Website of webapplicatie</option>
+          <option>Automatisering</option>
+          <option>Software op maat</option>
+          <option>ERP & machine koppelingen</option>
+          <option>Meerdere diensten / Weet ik nog niet</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Bericht</label>
+        <textarea placeholder="Vertel iets over jouw bedrijf en wat je zoekt..."></textarea>
+      </div>
+      <button class="btn btn--primary form-submit" onclick="handleSubmit(event)">Verstuur aanvraag →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <div class="nav__logo">AM<em>AI</em></div>
+        <p>AI-bureau voor het Nederlandse bedrijfsleven. Van automatisering tot ERP-koppelingen — wij bouwen AI in jouw bedrijf. Praktisch, snel en zonder technisch gedoe.</p>
+      </div>
+      <div>
+        <div class="footer__col-title">Diensten</div>
+        <ul class="footer__links">
+          <li><a href="#diensten">AI Educatie</a></li>
+          <li><a href="#diensten">Websites & webapps</a></li>
+          <li><a href="#diensten">Automatiseringen</a></li>
+          <li><a href="#diensten">Software oplossingen</a></li>
+          <li><a href="#diensten">ERP & machine koppelingen</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer__col-title">Contact</div>
+        <ul class="footer__links">
+          <li><a href="#contact">Gratis kennismaken</a></li>
+          <li><a href="mailto:info@am-ai.online">info@am-ai.online</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 AMAI. Alle rechten voorbehouden.</span>
+      <span>am-ai.online</span>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+
+// NAV SCROLL
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// HAMBURGER
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  mobileMenu.classList.toggle('open');
+});
+function closeMobile() {
+  mobileMenu.classList.remove('open');
+}
+
+// CANVAS ANIMATIE — zwevende figuren
+const canvas = document.getElementById('heroCanvas');
+const ctx = canvas.getContext('2d');
+let figures = [], W, H, animId;
+
+// PNG characters — voeg meer toe door extra entries toe te voegen
+const CHAR_FILES = [
+  'astronaut.png',
+  // 'office-worker.png',
+  // 'construction-worker.png',
+  // 'robot.png',
+  // 'teacher.png',
+];
+
+const charImages = {};
+let loadedCount = 0;
+
+function resize() {
+  W = canvas.width  = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+
+function initFigures() {
+  figures = [];
+  const count = Math.min(Math.floor((W * H) / 22000), 30);
+  const keys = CHAR_FILES.filter(f => charImages[f]);
+  if (!keys.length) return;
+  for (let i = 0; i < count; i++) {
+    const key = keys[Math.floor(Math.random() * keys.length)];
+    figures.push({
+      x:    Math.random() * W,
+      y:    Math.random() * H,
+      vx:   (Math.random() - 0.5) * 0.35,
+      vy:   (Math.random() - 0.5) * 0.35,
+      rot:  Math.random() * Math.PI * 2,
+      vrot: (Math.random() - 0.5) * 0.008,
+      size: Math.random() * 52 + 36,
+      alpha: Math.random() * 0.35 + 0.2,
+      key
+    });
+  }
+}
+
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+  for (let f of figures) {
+    f.x += f.vx; f.y += f.vy; f.rot += f.vrot;
+    const pad = f.size * 1.5;
+    if (f.x < -pad) f.x = W + pad;
+    if (f.x > W + pad) f.x = -pad;
+    if (f.y < -pad) f.y = H + pad;
+    if (f.y > H + pad) f.y = -pad;
+    const img = charImages[f.key];
+    if (!img) continue;
+    ctx.save();
+    ctx.globalAlpha = f.alpha;
+    ctx.translate(f.x, f.y);
+    ctx.rotate(f.rot);
+    ctx.drawImage(img, -f.size / 2, -f.size / 2, f.size, f.size);
+    ctx.restore();
+  }
+  animId = requestAnimationFrame(draw);
+}
+
+// Laad PNG's
+CHAR_FILES.forEach(file => {
+  const img = new Image();
+  img.onload = () => {
+    charImages[file] = img;
+    loadedCount++;
+    if (loadedCount === CHAR_FILES.length) {
+      resize();
+      initFigures();
+      draw();
+    }
+  };
+  img.src = file;
+});
+
+window.addEventListener('resize', () => {
+  cancelAnimationFrame(animId);
+  resize();
+  initFigures();
+  draw();
+});
+
+// SCROLL REVEAL
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); }
+  });
+}, { threshold: 0.12 });
+reveals.forEach(el => observer.observe(el));
+
+// FORM SUBMIT
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target;
+  btn.textContent = ' Verstuurd! We nemen snel contact op.';
+  btn.style.background = '#10B981';
+  btn.disabled = true;
+}
+
+</script>
+</body>
+</html>
