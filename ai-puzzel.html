@@ -243,32 +243,36 @@ function buildPath(W, H, nubs) {
 
 function applyPuzzleShapes() {
   const pieces = document.querySelectorAll('.piece[data-idx]');
-  pieces.forEach(piece => {
-    const i   = parseInt(piece.dataset.idx, 10);
-    const nubs = PIECE_NUBS[i] || ['f','f','f','f'];
-    const W   = piece.offsetWidth;
-    const H   = piece.offsetHeight;
+
+  // Phase 1 — batch all DOM reads (no writes yet)
+  const data = Array.from(pieces).map(piece => ({
+    piece,
+    i: parseInt(piece.dataset.idx, 10),
+    W: piece.offsetWidth,
+    H: piece.offsetHeight,
+    isDone: piece.classList.contains('piece--done'),
+  }));
+
+  // Phase 2 — batch all DOM writes
+  data.forEach(({ piece, i, W, H, isDone }) => {
     if (!W || !H) return;
+    const nubs    = PIECE_NUBS[i] || ['f','f','f','f'];
+    const color   = PIECES[i]?.color || '#2563EB';
+    const strokeW = isDone ? 2.5 : 1.8;
+    const pathStr = buildPath(W, H, nubs);
 
-    const color     = PIECES[i]?.color || '#2563EB';
-    const isDone    = piece.classList.contains('piece--done');
-    const bgFill    = '#111D35';   /* done-state tint handled by CSS filter */
-    const strokeW   = isDone ? 2.5 : 1.8;
-    const pathStr   = buildPath(W, H, nubs);
-
-    // Remove old SVG if present, inject fresh one
     let svg = piece.querySelector('.piece__bg');
     if (!svg) {
       svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
       svg.classList.add('piece__bg');
-      piece.insertBefore(svg, piece.firstChild);
+      piece.prepend(svg);
     }
     svg.setAttribute('width', W);
     svg.setAttribute('height', H);
     svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
     svg.setAttribute('overflow', 'visible');
     svg.innerHTML =
-      `<path d="${pathStr}" fill="${bgFill}" stroke="${color}" stroke-width="${strokeW}" stroke-linejoin="round" stroke-linecap="round"/>` +
+      `<path d="${pathStr}" fill="#111D35" stroke="${color}" stroke-width="${strokeW}" stroke-linejoin="round" stroke-linecap="round"/>` +
       `<rect x="0" y="0" width="${W}" height="4" fill="${color}" rx="2"/>`;
   });
 }
