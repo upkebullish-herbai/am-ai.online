@@ -443,10 +443,10 @@ const CHAR_FILES = [
 
 // Robot fade in/uit staat
 const robot = {
-  state: 'hidden', // hidden | fadein | visible | fadeout
+  state: 'hidden',
   alpha: 0,
   x: 0, y: 0,
-  size: 150,
+  size: 100,
   timer: 0,
   FADE_SPEED: 0.008,
   VISIBLE_FRAMES: 280,
@@ -454,8 +454,9 @@ const robot = {
 };
 
 function robotNewPos() {
-  robot.x = W * 0.15 + Math.random() * W * 0.7;
-  robot.y = H * 0.15 + Math.random() * H * 0.6;
+  // Vaste plek: rechts van de subtitel, midden van het scherm
+  robot.x = W * 0.72;
+  robot.y = H * 0.42;
 }
 
 function updateRobot() {
