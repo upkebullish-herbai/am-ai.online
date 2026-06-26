@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hoe werkt AI? — De Grote Puzzel</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Nunito:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="puzzel.css">
+</head>
+<body>
+
+<!-- Background floaters -->
+<div class="floaters" id="floaters"></div>
+
+<main>
+<div class="header">
+  <a href="amai-online.html" class="header__back">← Terug naar AMAI</a>
+  <div class="header__eyebrow">Interactieve les · 10–14 jaar</div>
+  <h1 class="header__title">De Grote AI <span>Puzzel</span></h1>
+  <p class="header__sub">Klik op een puzzelstukje om te ontdekken hoe AI écht werkt. Ontgrendel ze allemaal!</p>
+</div>
+
+<div class="progress-wrap">
+  <div class="progress-label">
+    <span id="progressText">0 van 6 stukjes ontgrendeld</span>
+    <span id="progressPct">0%</span>
+  </div>
+  <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+</div>
+
+<div class="board" id="board"></div>
+<div class="complete" id="complete">
+  <div class="complete__emoji"></div>
+  <h2 class="complete__title">Puzzel voltooid!</h2>
+  <p class="complete__text">Wauw — jij snapt nu hoe AI werkt! Van data verzamelen tot slimme AI-agenten die zelfstandig taken uitvoeren. Dat weten veel volwassenen nog niet eens!</p>
+  <button class="btn" onclick="resetAll()">↺ Opnieuw spelen</button>
+</div>
+</main>
+
+
+<script src="script.js"></script>
+<script>
+
+const PIECES = [
+  {
+    id: 1,
+    color: '#F59E0B',
+    glow: 'rgba(245,158,11,0.2)',
+    unlockAfter: 0,
+    icon: `<svg viewBox="0 0 52 52" fill="none"><rect x="6" y="10" width="40" height="28" rx="4" stroke="#F59E0B" stroke-width="2.5"/><path d="M6 18h40" stroke="#F59E0B" stroke-width="2"/><circle cx="12" cy="14" r="1.5" fill="#F59E0B"/><circle cx="18" cy="14" r="1.5" fill="#F59E0B"/><path d="M14 26h8M14 31h14" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/><path d="M26 38v4M20 42h12" stroke="#F59E0B" stroke-width="2" stroke-linecap="round"/></svg>`,
+    number: 'Stukje 1',
+    question: 'Waar haalt AI al zijn kennis vandaan?',
+    hint: ' Denk aan het hele internet…',
+    label: 'Web scraping & data',
+    title: 'AI eet data als ontbijt!',
+    explain: 'Voordat een AI slim kan worden, moet hij eerst heel veel leren. Dat doet hij door miljoenen websites, boeken en artikelen te lezen — dit noemen we web scraping. De AI "schraapt" als het ware informatie van het internet, net zoals jij dingen opzoekt maar dan miljoen keer sneller.',
+    example: '<strong>Stel je voor:</strong> een robot leest in één dag alle boeken van alle bibliotheken ter wereld. Dat is wat AI doet om te leren!',
+    tags: ['Data', 'Internet', 'Web scraping', 'Leren']
+  },
+  {
+    id: 2,
+    color: '#10B981',
+    glow: 'rgba(16,185,129,0.2)',
+    unlockAfter: 1,
+    icon: `<svg viewBox="0 0 52 52" fill="none"><rect x="8" y="8" width="36" height="36" rx="5" stroke="#10B981" stroke-width="2.5"/><path d="M16 20h8M16 26h14M16 32h10" stroke="#10B981" stroke-width="2" stroke-linecap="round"/><circle cx="36" cy="20" r="5" stroke="#10B981" stroke-width="2"/><path d="M36 17v3l2 2" stroke="#10B981" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+    number: 'Stukje 2',
+    question: 'Hoe onthoudt AI wat het heeft geleerd?',
+    hint: ' Net als jouw hersenen, maar dan digitaal',
+    label: 'Trainingsdata & patronen',
+    title: 'Patronen onthouden = slim worden',
+    explain: 'AI onthoudt geen losse feiten — hij leert patronen. Als de AI duizenden zinnen leest over honden, begrijpt hij wat een hond is zonder ooit een foto te zien. Al die patronen worden opgeslagen als getallen in een gigantisch wiskundig netwerk.',
+    example: '<strong>Vergelijk het met:</strong> als jij 1000 foto\'s van katten ziet, herken je de volgende kat meteen. Je hersenen leerden het patroon "kat" — AI doet precies hetzelfde!',
+    tags: ['Patronen', 'Geheugen', 'Getallen', 'Netwerk']
+  },
+  {
+    id: 3,
+    color: '#2563EB',
+    glow: 'rgba(37,99,235,0.2)',
+    unlockAfter: 2,
+    icon: `<svg viewBox="0 0 52 52" fill="none"><rect x="10" y="30" width="32" height="14" rx="3" stroke="#2563EB" stroke-width="2.5"/><path d="M18 30v-8a8 8 0 0 1 16 0v8" stroke="#2563EB" stroke-width="2.5" stroke-linecap="round"/><circle cx="26" cy="37" r="3" fill="#2563EB" fill-opacity="0.3" stroke="#2563EB" stroke-width="2"/><path d="M26 40v4" stroke="#2563EB" stroke-width="2" stroke-linecap="round"/></svg>`,
+    number: 'Stukje 3',
+    question: 'Wat is een LLM?',
+    hint: ' Heel veel woorden + heel veel rekenen',
+    label: 'Large Language Model',
+    title: 'LLM = de superschlimme taalcomputer',
+    explain: 'LLM staat voor "Large Language Model" — een supergrote taalcomputer. Hij heeft zo veel tekst gelezen dat hij heel goed begrijpt hoe taal werkt: zinnen maken, vragen beantwoorden, verhalen schrijven. ChatGPT, Gemini en Claude zijn allemaal LLMs.',
+    example: '<strong>Hoe werkt het?</strong> Jij typt "Wat is de hoofdstad van Frankrijk?" → de LLM berekent welk woord het meest waarschijnlijk als antwoord past → "Parijs!" Niet omdat hij het weet, maar omdat hij het patroon heeft geleerd.',
+    tags: ['LLM', 'Taal', 'ChatGPT', 'Claude', 'Gemini']
+  },
+  {
+    id: 4,
+    color: '#7C3AED',
+    glow: 'rgba(124,58,237,0.2)',
+    unlockAfter: 3,
+    icon: `<svg viewBox="0 0 52 52" fill="none"><circle cx="26" cy="26" r="16" stroke="#7C3AED" stroke-width="2.5"/><circle cx="26" cy="26" r="6" fill="#7C3AED" fill-opacity="0.2" stroke="#7C3AED" stroke-width="2"/><path d="M26 10v4M26 38v4M10 26h4M38 26h4" stroke="#7C3AED" stroke-width="2" stroke-linecap="round"/><circle cx="26" cy="26" r="2" fill="#7C3AED"/></svg>`,
+    number: 'Stukje 4',
+    question: 'Hoe "denkt" AI na over een vraag?',
+    hint: ' Voorspellen wat er daarna komt',
+    label: 'Hoe AI antwoorden maakt',
+    title: 'AI gokt heel goed wat daarna komt',
+    explain: 'AI denkt niet echt na zoals jij. Hij voorspelt steeds het volgende woord, gebaseerd op alles wat hij geleerd heeft. Woordje voor woordje, heel snel. Dat lijkt op denken, maar het is eigenlijk superslim raden op basis van patronen.',
+    example: '<strong>Probeer het zelf:</strong> "De kat zit op de..." — jij weet dat "mat", "bank" of "stoel" logisch klinkt. Dat weet de AI ook, maar hij heeft dat geleerd van miljoenen zinnen!',
+    tags: ['Voorspellen', 'Woorden', 'Tokens', 'Kansen']
+  },
+  {
+    id: 5,
+    color: '#FF6B6B',
+    glow: 'rgba(255,107,107,0.2)',
+    unlockAfter: 4,
+    icon: `<svg viewBox="0 0 52 52" fill="none"><circle cx="26" cy="20" r="8" stroke="#FF6B6B" stroke-width="2.5"/><path d="M14 42c0-6.627 5.373-12 12-12s12 5.373 12 12" stroke="#FF6B6B" stroke-width="2.5" stroke-linecap="round"/><path d="M36 14l4-4M36 14h4M36 14v-4" stroke="#FF6B6B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><path d="M40 28l2 2-4 4" stroke="#FF6B6B" stroke-width="2" stroke-linecap="round"/></svg>`,
+    number: 'Stukje 5',
+    question: 'Kan AI ook zelf dingen doen zonder hulp?',
+    hint: ' Zelfstandig werken = agent',
+    label: 'AI Agents',
+    title: 'AI Agents: AI die zelf handelt!',
+    explain: 'Een gewone AI wacht tot jij een vraag stelt. Maar een AI Agent kan zelf taken uitvoeren! Hij bedenkt een plan, zoekt informatie op, stuurt e-mails, boekt vluchten of schrijft code — allemaal zonder dat jij elke stap hoeft te zeggen. Zoals een digitale assistent die écht zelfstandig is.',
+    example: '<strong>Voorbeeld:</strong> Jij zegt "Plan een verjaardag voor 10 personen met een budget van €100." De AI agent zoekt locaties, vergelijkt prijzen, stuurt uitnodigingen en maakt een planning — allemaal zelf!',
+    tags: ['Agent', 'Zelfstandig', 'Taken', 'Automatisch']
+  },
+  {
+    id: 6,
+    color: '#0EA5E9',
+    glow: 'rgba(14,165,233,0.2)',
+    unlockAfter: 5,
+    icon: `<svg viewBox="0 0 52 52" fill="none"><path d="M10 36 L26 10 L42 36 Z" stroke="#0EA5E9" stroke-width="2.5" stroke-linejoin="round"/><circle cx="26" cy="10" r="3" fill="#0EA5E9"/><circle cx="10" cy="36" r="3" fill="#0EA5E9"/><circle cx="42" cy="36" r="3" fill="#0EA5E9"/><path d="M18 28l8-12 8 12" stroke="#0EA5E9" stroke-width="1.5" stroke-linejoin="round" opacity="0.4"/></svg>`,
+    number: 'Stukje 6 — Het Grote Plaatje',
+    question: 'Hoe past alles samen?',
+    hint: ' Van data tot slimme AI assistent',
+    label: 'AI: het complete plaatje',
+    title: 'Van internet tot jouw AI assistent',
+    explain: 'Nu snap je het hele plaatje: (1) AI verzamelt data van het web, (2) leert patronen uit die data, (3) wordt een LLM die taal begrijpt, (4) voorspelt antwoorden woord voor woord, (5) en als Agent kan hij ook zelfstandig taken uitvoeren. Elke AI die jij gebruikt doorloopt al deze stappen!',
+    example: '<strong>De keten:</strong> Internet → Data → Training → LLM → Antwoord → Agent → Actie. Jij staat aan het eind — en jij bepaalt wat AI voor jou doet!',
+    tags: ['AI', 'Web2', 'LLM', 'Agent', 'Toekomst']
+  }
+];
+
+let unlocked = new Set();
+
+function puzzleIcon(color, size=52) {
+  const d = size, h = d/2, b = d*0.2, nd = d*0.15, nw = d*0.12;
+  return `<svg width="${d}" height="${d}" viewBox="0 0 ${d} ${d}" fill="none">
+    <path d="M${b},${b} L${h-nw},${b} C${h-nw},${b} ${h-nw},${b-nd} ${h},${b-nd} C${h+nw},${b-nd} ${h+nw},${b} ${h+nw},${b} L${d-b},${b} L${d-b},${h-nw} C${d-b},${h-nw} ${d-b+nd},${h-nw} ${d-b+nd},${h} C${d-b+nd},${h+nw} ${d-b},${h+nw} ${d-b},${h+nw} L${d-b},${d-b} L${h+nw},${d-b} C${h+nw},${d-b} ${h+nw},${d-b+nd} ${h},${d-b+nd} C${h-nw},${d-b+nd} ${h-nw},${d-b} ${h-nw},${d-b} L${b},${d-b} L${b},${h+nw} C${b},${h+nw} ${b-nd},${h+nw} ${b-nd},${h} C${b-nd},${h-nw} ${b},${h-nw} ${b},${h-nw} Z"
+    fill="${color}" fill-opacity="0.15" stroke="${color}" stroke-width="1.8" stroke-linejoin="round" stroke-linecap="round"/>
+  </svg>`;
+}
+
+function renderPieces() {
+  const board = document.getElementById('board');
+  board.innerHTML = '';
+
+  PIECES.forEach((p, i) => {
+    const isUnlocked = unlocked.has(p.id);
+    const isLocked   = p.unlockAfter > 0 && !unlocked.has(p.unlockAfter);
+
+    const el = document.createElement('div');
+    el.className = 'piece' + (isUnlocked ? ' piece--done' : '') + (isLocked ? ' piece--locked' : '');
+    el.style.setProperty('--piece-color', p.color);
+    el.style.setProperty('--piece-glow', p.glow);
+    el.dataset.id = p.id;
+
+    el.innerHTML = `
+      <div class="piece__front">
+        <div class="piece__icon">${p.icon}</div>
+        <div class="piece__number">${p.number}</div>
+        <div class="piece__question">${p.question}</div>
+        <div class="piece__hint">${p.hint}</div>
+        ${isLocked
+          ? `<div class="piece__hint" style="color:${p.color};margin-top:0.5rem"> Ontgrendel stukje ${p.unlockAfter} eerst</div>`
+          : `<div class="piece__tap"> Tik om te ontdekken</div>`
+        }
+      </div>
+      <div class="piece__back">
+        <div class="piece__label">${p.label}</div>
+        <div class="piece__title">${p.title}</div>
+        <div class="piece__explain">${p.explain}</div>
+        <div class="piece__example">${p.example}</div>
+        <div class="piece__tags">${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+      </div>
+    `;
+
+    if (!isLocked && !isUnlocked) {
+      el.addEventListener('click', () => unlock(p.id));
+    }
+
+    board.appendChild(el);
+  });
+}
+
+function unlock(id) {
+  unlocked.add(id);
+  updateProgress();
+  renderPieces();
+
+  // Shake confetti
+  spawnConfetti(PIECES.find(p => p.id === id).color);
+
+  if (unlocked.size === PIECES.length) {
+    setTimeout(() => {
+      document.getElementById('complete').classList.add('show');
+      document.getElementById('complete').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 600);
+  }
+}
+
+function updateProgress() {
+  const total = PIECES.length;
+  const done  = unlocked.size;
+  const pct   = Math.round((done / total) * 100);
+  document.getElementById('progressText').textContent = `${done} van ${total} stukjes ontgrendeld`;
+  document.getElementById('progressPct').textContent  = pct + '%';
+  document.getElementById('progressFill').style.width = pct + '%';
+}
+
+function resetAll() {
+  unlocked.clear();
+  updateProgress();
+  renderPieces();
+  document.getElementById('complete').classList.remove('show');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// CONFETTI
+function spawnConfetti(color) {
+  for (let i = 0; i < 18; i++) {
+    const el = document.createElement('div');
+    el.style.cssText = `
+      position:fixed;
+      left:${Math.random()*100}vw;
+      top:${Math.random()*40 + 20}vh;
+      width:${Math.random()*8+6}px;
+      height:${Math.random()*8+6}px;
+      background:${color};
+      border-radius:${Math.random()>0.5?'50%':'3px'};
+      pointer-events:none;
+      z-index:9999;
+      opacity:0.9;
+      animation: confFall ${Math.random()*1+0.8}s ease-out forwards;
+      animation-delay:${Math.random()*0.3}s;
+    `;
+    document.body.appendChild(el);
+    setTimeout(() => el.remove(), 1500);
+  }
+}
+
+// Add confetti keyframe dynamically
+const confStyle = document.createElement('style');
+confStyle.textContent = `
+  @keyframes confFall {
+    0%   { transform: translateY(0) rotate(0deg); opacity:0.9; }
+    100% { transform: translateY(120px) rotate(${Math.random()*360}deg); opacity:0; }
+  }
+`;
+document.head.appendChild(confStyle);
+
+// FLOATING BG DECORATIONS
+function initFloaters() {
+  const colors = ['#F59E0B','#7C3AED','#2563EB','#10B981','#FF6B6B','#0EA5E9'];
+  const wrap = document.getElementById('floaters');
+  for (let i = 0; i < 14; i++) {
+    const c = colors[i % colors.length];
+    const size = Math.random() * 40 + 20;
+    const el = document.createElement('div');
+    el.className = 'floater';
+    el.style.cssText = `
+      left:${Math.random()*100}vw;
+      top:${Math.random()*100}vh;
+      width:${size}px; height:${size}px;
+      animation-duration:${Math.random()*20+15}s;
+      animation-delay:-${Math.random()*20}s;
+    `;
+    el.innerHTML = Math.random() > 0.5
+      ? puzzleIcon(c, size)
+      : `<svg width="${size}" height="${size}" viewBox="0 0 1 1"><circle cx=".5" cy=".5" r=".5" fill="${c}"/></svg>`;
+    wrap.appendChild(el);
+  }
+}
+
+initFloaters();
+renderPieces();
+updateProgress();
+
+</script>
+</body>
+</html>

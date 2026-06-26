@@ -1,0 +1,672 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AMAI — AI-educatie voor scholen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="main.css">
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav" id="nav">
+  <div class="container nav__inner">
+    <div class="nav__logo">AM<em>AI</em></div>
+    <ul class="nav__links">
+      <li><a href="#modules" class="nav__link">Modules</a></li>
+      <li><a href="diensten.html" class="nav__link">Diensten</a></li>
+      <li><a href="#pakketten" class="nav__link">Pakketten</a></li>
+      <li><a href="#hoe" class="nav__link">Hoe het werkt</a></li>
+      <li><a href="#contact" class="nav__cta">Gratis kennismaken</a></li>
+    </ul>
+    <div class="nav__hamburger" id="hamburger">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#modules" onclick="closeMobile()">Modules</a>
+  <a href="#pakketten" onclick="closeMobile()">Pakketten</a>
+  <a href="#hoe" onclick="closeMobile()">Hoe het werkt</a>
+  <a href="#contact" class="nav__cta" onclick="closeMobile()">Gratis kennismaken</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <canvas id="heroCanvas"></canvas>
+  <div class="hero__glow hero__glow--1"></div>
+  <div class="hero__glow hero__glow--2"></div>
+  <div class="container">
+    <div class="hero__content">
+      <div class="hero__badge">Speciaal voor scholen in Nederland</div>
+      <h1 class="hero__title">
+        Jouw school klaar<br>
+        <span class="text-gradient">voor de AI-generatie</span>
+      </h1>
+      <p class="hero__sub">
+        Leerlingen groeien op met AI. Snapt jouw school het ook? Wij komen langs met praktische workshops die leerlingen, docenten én directie écht verder helpen — begrijpelijk, veilig en op een speelse manier.
+      </p>
+      <div class="hero__actions">
+        <a href="#contact" class="btn btn--primary">Plan gratis kennismaking ↗</a>
+                <div class="hero__puzzle-cta">
+          <a href="ai-puzzel.html" class="hero__puzzle-btn">
+            <span class="hero__puzzle-pieces">
+              <svg width="18" height="18" viewBox="0 0 40 40" fill="none"><path d="M4,4 L15,4 C15,4 15,-2 20,-2 C25,-2 25,4 25,4 L36,4 L36,15 C36,15 42,15 42,20 C42,25 36,25 36,25 L36,36 L25,36 C25,36 25,42 20,42 C15,42 15,36 15,36 L4,36 L4,25 C4,25 -2,25 -2,20 C-2,15 4,15 4,15 Z" fill="#F59E0B" fill-opacity="0.25" stroke="#F59E0B" stroke-width="2.5" stroke-linejoin="round"/></svg>
+              <svg width="18" height="18" viewBox="0 0 40 40" fill="none"><path d="M4,4 L15,4 C15,4 15,-2 20,-2 C25,-2 25,4 25,4 L36,4 L36,15 C36,15 42,15 42,20 C42,25 36,25 36,25 L36,36 L25,36 C25,36 25,42 20,42 C15,42 15,36 15,36 L4,36 L4,25 C4,25 -2,25 -2,20 C-2,15 4,15 4,15 Z" fill="#7C3AED" fill-opacity="0.25" stroke="#7C3AED" stroke-width="2.5" stroke-linejoin="round"/></svg>
+              <svg width="18" height="18" viewBox="0 0 40 40" fill="none"><path d="M4,4 L15,4 C15,4 15,-2 20,-2 C25,-2 25,4 25,4 L36,4 L36,15 C36,15 42,15 42,20 C42,25 36,25 36,25 L36,36 L25,36 C25,36 25,42 20,42 C15,42 15,36 15,36 L4,36 L4,25 C4,25 -2,25 -2,20 C-2,15 4,15 4,15 Z" fill="#10B981" fill-opacity="0.25" stroke="#10B981" stroke-width="2.5" stroke-linejoin="round"/></svg>
+            </span>
+            Doe de AI-puzzel — leer hoe AI werkt
+            <span style="opacity:0.6">→</span>
+          </a>
+        </div>
+            <a href="#modules" class="btn btn--outline">Bekijk modules →</a>
+      </div>
+      <div class="hero__stats">
+        <div>
+          <div class="stat-num text-gradient">5+</div>
+          <div class="stat-label">Modules beschikbaar</div>
+        </div>
+        <div>
+          <div class="stat-num text-gradient">2–4u</div>
+          <div class="stat-label">Per workshop</div>
+        </div>
+        <div>
+          <div class="stat-num text-gradient">PO–VO</div>
+          <div class="stat-label">Alle niveaus</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOR WHO -->
+<section class="section for-who">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Voor wie</span>
+      <h2>AI-educatie voor iedereen in school</h2>
+      <p>Van leerling tot directie — wij hebben een passend programma voor elke rol.</p>
+    </div>
+    <div class="for-who__grid">
+      <div class="for-who__card reveal reveal-delay-1">
+        <div class="for-who__icon"><svg width="44" height="44" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 20,20 L 39,20 C 39,20 39,6 50,6 C 61,6 61,20 61,20 L 80,20 L 80,39 C 80,39 66,39 66,50 C 66,61 80,61 80,61 L 80,80 L 61,80 C 61,80 61,94 50,94 C 39,94 39,80 39,80 L 20,80 L 20,61 C 20,61 34,61 34,50 C 34,39 20,39 20,39 Z" fill="#10B981" fill-opacity="0.22" stroke="#10B981" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+        <h3>Docenten</h3>
+        <p>Praktische tools die je morgen kunt gebruiken in de les. Geen technische voorkennis nodig.</p>
+      </div>
+      <div class="for-who__card reveal reveal-delay-3">
+        <div class="for-who__icon"><svg width="44" height="44" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 20,20 L 39,20 C 39,20 39,34 50,34 C 61,34 61,20 61,20 L 80,20 L 80,39 C 80,39 94,39 94,50 C 94,61 80,61 80,61 L 80,80 L 61,80 C 61,80 61,66 50,66 C 39,66 39,80 39,80 L 20,80 L 20,61 C 20,61 6,61 6,50 C 6,39 20,39 20,39 Z" fill="#2563EB" fill-opacity="0.22" stroke="#2563EB" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+        <h3>Directie & bestuur</h3>
+        <p>Strategische sessies over AI-beleid, kansen en risico's voor de toekomst van jouw school.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- MODULES -->
+<section class="section" id="modules">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Modules</span>
+      <h2>Kies wat bij jouw school past</h2>
+      <p>Los te boeken of als pakket. Elke module is op maat voor de doelgroep.</p>
+    </div>
+    <div class="modules-grid">
+      <div class="module-card module-card--1 reveal reveal-delay-1">
+        <div class="module-card__icon"><svg width="44" height="44" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 20,20 L 39,20 C 39,20 39,6 50,6 C 61,6 61,20 61,20 L 80,20 L 80,39 C 80,39 94,39 94,50 C 94,61 80,61 80,61 L 80,80 L 61,80 C 61,80 61,66 50,66 C 39,66 39,80 39,80 L 20,80 L 20,61 C 20,61 34,61 34,50 C 34,39 20,39 20,39 Z" fill="#10B981" fill-opacity="0.22" stroke="#10B981" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+        <div class="module-card__tag">Leerlingen · Basis</div>
+        <h3>Wat is AI?</h3>
+        <p>Hoe werkt kunstmatige intelligentie? Leerlingen ontdekken AI aan de hand van voorbeelden uit hun eigen leven.</p>
+        <ul class="module-card__list">
+          <li>Wat AI wel en niet kan</li>
+          <li>AI in apps die je al gebruikt</li>
+          <li>Hoe leert een AI-model?</li>
+        </ul>
+      </div>
+      <div class="module-card module-card--2 reveal reveal-delay-2">
+        <div class="module-card__icon"><svg width="44" height="44" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 20,20 L 39,20 C 39,20 39,34 50,34 C 61,34 61,20 61,20 L 80,20 L 80,39 C 80,39 94,39 94,50 C 94,61 80,61 80,61 L 80,80 L 61,80 C 61,80 61,94 50,94 C 39,94 39,80 39,80 L 20,80 L 20,61 C 20,61 34,61 34,50 C 34,39 20,39 20,39 Z" fill="#FF6B6B" fill-opacity="0.22" stroke="#FF6B6B" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+        <div class="module-card__tag">Leerlingen · 12–18</div>
+        <h3>Social media & risico's</h3>
+        <p>Algoritmes, filterbubbels en deepfakes — leerlingen leren wat er achter hun scherm speelt en hoe ze zichzelf beschermen.</p>
+        <ul class="module-card__list">
+          <li>Hoe werkt een algoritme?</li>
+          <li>Deepfakes herkennen</li>
+          <li>Jouw data, jouw keuze</li>
+        </ul>
+      </div>
+      <div class="module-card module-card--3 reveal reveal-delay-3">
+        <div class="module-card__icon"><svg width="44" height="44" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 20,20 L 39,20 C 39,20 39,6 50,6 C 61,6 61,20 61,20 L 80,20 L 80,39 C 80,39 66,39 66,50 C 66,61 80,61 80,61 L 80,80 L 61,80 C 61,80 61,66 50,66 C 39,66 39,80 39,80 L 20,80 L 20,61 C 20,61 6,61 6,50 C 6,39 20,39 20,39 Z" fill="#2563EB" fill-opacity="0.22" stroke="#2563EB" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+        <div class="module-card__tag">Docenten</div>
+        <h3>AI in de klas</h3>
+        <p>Praktische workshop voor docenten: direct toepasbare AI-tools voor lesvoorbereiding, feedback en differentiatie.</p>
+        <ul class="module-card__list">
+          <li>ChatGPT voor lesvoorbereiding</li>
+          <li>Sneller feedback geven</li>
+          <li>Differentiatie met AI</li>
+        </ul>
+      </div>
+      <div class="module-card module-card--4 reveal reveal-delay-1">
+        <div class="module-card__icon"><svg width="44" height="44" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 20,20 L 39,20 C 39,20 39,34 50,34 C 61,34 61,20 61,20 L 80,20 L 80,39 C 80,39 66,39 66,50 C 66,61 80,61 80,61 L 80,80 L 61,80 C 61,80 61,94 50,94 C 39,94 39,80 39,80 L 20,80 L 20,61 C 20,61 6,61 6,50 C 6,39 20,39 20,39 Z" fill="#F59E0B" fill-opacity="0.22" stroke="#F59E0B" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+        <div class="module-card__tag">Leerlingen · Gevorderd</div>
+        <h3>AI creatief gebruiken</h3>
+        <p>Zelf aan de slag: leerlingen maken iets met AI en leren hoe ze goede prompts schrijven voor echt resultaat.</p>
+        <ul class="module-card__list">
+          <li>Prompting leren</li>
+          <li>Beeldgeneratie & muziek</li>
+          <li>Eigen mini-project</li>
+        </ul>
+      </div>
+      <div class="module-card module-card--5 reveal reveal-delay-2">
+        <div class="module-card__icon"><svg width="44" height="44" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 20,20 L 39,20 C 39,20 39,6 50,6 C 61,6 61,20 61,20 L 80,20 L 80,39 C 80,39 94,39 94,50 C 94,61 80,61 80,61 L 80,80 L 61,80 C 61,80 61,94 50,94 C 39,94 39,80 39,80 L 20,80 L 20,61 C 20,61 34,61 34,50 C 34,39 20,39 20,39 Z" fill="#7C3AED" fill-opacity="0.22" stroke="#7C3AED" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg></div>
+        <div class="module-card__tag">Directie & management</div>
+        <h3>AI-beleid voor scholen</h3>
+        <p>Hoe ga je als school om met AI? Van beleid tot kansen — een strategische sessie voor beslissers.</p>
+        <ul class="module-card__list">
+          <li>Kansen én risico's in kaart</li>
+          <li>Regels opstellen als school</li>
+          <li>Toekomstbestendig onderwijs</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="section how" id="hoe">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Hoe het werkt</span>
+      <h2>Van eerste contact tot workshop</h2>
+      <p>Eenvoudig, snel en zonder gedoe. Wij regelen alles zodat jij je kunt focussen op je school.</p>
+    </div>
+    <div class="how__steps">
+      <div class="how__step reveal reveal-delay-1">
+        <div class="how__step-num">1</div>
+        <h3>Kennismaken</h3>
+        <p>We plannen een gratis gesprek van 30 minuten om jouw school en wensen te leren kennen.</p>
+      </div>
+      <div class="how__step reveal reveal-delay-2">
+        <div class="how__step-num">2</div>
+        <h3>Op maat offerte</h3>
+        <p>Je ontvangt binnen 2 werkdagen een duidelijke offerte met passende modules en planning.</p>
+      </div>
+      <div class="how__step reveal reveal-delay-3">
+        <div class="how__step-num">3</div>
+        <h3>Workshop op school</h3>
+        <p>We komen naar jou toe. Geen reiskosten, geen gedoe — gewoon een inspirerende sessie op locatie.</p>
+      </div>
+      <div class="how__step reveal reveal-delay-4">
+        <div class="how__step-num">4</div>
+        <h3>Groei & vervolg</h3>
+        <p>Na afloop ontvang je een evaluatie en concrete vervolgstappen voor verdere AI-integratie.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section class="section" id="pakketten">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Pakketten</span>
+      <h2>Transparante prijzen, geen verrassingen</h2>
+      <p>Kies het pakket dat past bij jouw school. Alle prijzen zijn exclusief BTW.</p>
+    </div>
+    <div class="pricing-grid">
+      <div class="pricing-card reveal reveal-delay-1">
+        <div class="pricing-label">Instap</div>
+        <div class="pricing-price"><sup>€</sup>600</div>
+        <div class="pricing-period">per workshop · eenmalig</div>
+        <hr class="pricing-divider">
+        <ul class="pricing-features">
+          <li class="pricing-feature"><span class="pricing-feature-check"><svg width="16" height="16" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 20,20 L 39,20 C 39,20 39,6 50,6 C 61,6 61,20 61,20 L 80,20 L 80,39 C 80,39 66,39 66,50 C 66,61 80,61 80,61 L 80,80 L 61,80 C 61,80 61,66 50,66 C 39,66 39,80 39,80 L 20,80 L 20,61 C 20,61 6,61 6,50 C 6,39 20,39 20,39 Z" fill="#10B981" fill-opacity="0.3" stroke="#10B981" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg></span>1 module naar keuze</li>
+          <li class="pricing-feature"><span class="pricing-feature-check"><svg width="16" height="16" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 20,20 L 39,20 C 39,20 39,6 50,6 C 61,6 61,20 61,20 L 80,20 L 80,39 C 80,39 66,39 66,50 C 66,61 80,61 80,61 L 80,80 L 61,80 C 61,80 61,66 50,66 C 39,66 39,80 39,80 L 20,80 L 20,61 C 20,61 6,61 6,50 C 6,39 20,39 20,39 Z" fill="#10B981" fill-opacity="0.3" stroke="#10B981" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg></span>2 uur op locatie</li>
+          <li class="pricing-feature"><span class="pricing-feature-check"><svg width="16" height="16" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 20,20 L 39,20 C 39,20 39,6 50,6 C 61,6 61,20 61,20 L 80,20 L 80,39 C 80,39 66,39 66,50 C 66,61 80,61 80,61 L 80,80 L 61,80 C 61,80 61,66 50,66 C 39,66 39,80 39,80 L 20,80 L 20,61 C 20,61 6,61 6,50 C 6,39 20,39 20,39 Z" fill="#10B981" fill-opacity="0.3" stroke="#10B981" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg></span>Tot 30 deelnemers</li>
+          <li class="pricing-feature"><span class="pricing-feature-check"><svg width="16" height="16" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 20,20 L 39,20 C 39,20 39,6 50,6 C 61,6 61,20 61,20 L 80,20 L 80,39 C 80,39 66,39 66,50 C 66,61 80,61 80,61 L 80,80 L 61,80 C 61,80 61,66 50,66 C 39,66 39,80 39,80 L 20,80 L 20,61 C 20,61 6,61 6,50 C 6,39 20,39 20,39 Z" fill="#10B981" fill-opacity="0.3" stroke="#10B981" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg></span>Materialen inbegrepen</li>
+        </ul>
+        <a href="#contact" class="btn btn--outline btn--full">Vraag offerte aan</a>
+      </div>
+      <div class="pricing-card pricing-card--featured reveal reveal-delay-2">
+        <div class="pricing-label">Pakket</div>
+        <div class="pricing-price"><sup>€</sup>1.500</div>
+        <div class="pricing-period">3 modules · per schooljaar</div>
+        <hr class="pricing-divider">
+        <ul class="pricing-features">
+          <li class="pricing-feature"><span class="pricing-feature-check"><svg width="16" height="16" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 20,20 L 39,20 C 39,20 39,6 50,6 C 61,6 61,20 61,20 L 80,20 L 80,39 C 80,39 66,39 66,50 C 66,61 80,61 80,61 L 80,80 L 61,80 C 61,80 61,66 50,66 C 39,66 39,80 39,80 L 20,80 L 20,61 C 20,61 6,61 6,50 C 6,39 20,39 20,39 Z" fill="#10B981" fill-opacity="0.3" stroke="#10B981" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg></span>3 modules naar keuze</li>
+          <li class="pricing-feature"><span class="pricing-feature-check"><svg width="16" height="16" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 20,20 L 39,20 C 39,20 39,6 50,6 C 61,6 61,20 61,20 L 80,20 L 80,39 C 80,39 66,39 66,50 C 66,61 80,61 80,61 L 80,80 L 61,80 C 61,80 61,66 50,66 C 39,66 39,80 39,80 L 20,80 L 20,61 C 20,61 6,61 6,50 C 6,39 20,39 20,39 Z" fill="#10B981" fill-opacity="0.3" stroke="#10B981" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg></span>Vaste dag per maand</li>
+          <li class="pricing-feature"><span class="pricing-feature-check"><svg width="16" height="16" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 20,20 L 39,20 C 39,20 39,6 50,6 C 61,6 61,20 61,20 L 80,20 L 80,39 C 80,39 66,39 66,50 C 66,61 80,61 80,61 L 80,80 L 61,80 C 61,80 61,66 50,66 C 39,66 39,80 39,80 L 20,80 L 20,61 C 20,61 6,61 6,50 C 6,39 20,39 20,39 Z" fill="#10B981" fill-opacity="0.3" stroke="#10B981" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg></span>Docenten én leerlingen</li>
+          <li class="pricing-feature"><span class="pricing-feature-check"><svg width="16" height="16" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 20,20 L 39,20 C 39,20 39,6 50,6 C 61,6 61,20 61,20 L 80,20 L 80,39 C 80,39 66,39 66,50 C 66,61 80,61 80,61 L 80,80 L 61,80 C 61,80 61,66 50,66 C 39,66 39,80 39,80 L 20,80 L 20,61 C 20,61 6,61 6,50 C 6,39 20,39 20,39 Z" fill="#10B981" fill-opacity="0.3" stroke="#10B981" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg></span>Evaluatie & rapport</li>
+        </ul>
+        <a href="#contact" class="btn btn--primary btn--full">Gratis kennismaken</a>
+      </div>
+      <div class="pricing-card reveal reveal-delay-3">
+        <div class="pricing-label">Jaarabonnement</div>
+        <div class="pricing-price"><sup>€</sup>3.800</div>
+        <div class="pricing-period">per schooljaar · alles inbegrepen</div>
+        <hr class="pricing-divider">
+        <ul class="pricing-features">
+          <li class="pricing-feature"><span class="pricing-feature-check"><svg width="16" height="16" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 20,20 L 39,20 C 39,20 39,6 50,6 C 61,6 61,20 61,20 L 80,20 L 80,39 C 80,39 66,39 66,50 C 66,61 80,61 80,61 L 80,80 L 61,80 C 61,80 61,66 50,66 C 39,66 39,80 39,80 L 20,80 L 20,61 C 20,61 6,61 6,50 C 6,39 20,39 20,39 Z" fill="#10B981" fill-opacity="0.3" stroke="#10B981" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg></span>Alle 5 modules</li>
+          <li class="pricing-feature"><span class="pricing-feature-check"><svg width="16" height="16" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 20,20 L 39,20 C 39,20 39,6 50,6 C 61,6 61,20 61,20 L 80,20 L 80,39 C 80,39 66,39 66,50 C 66,61 80,61 80,61 L 80,80 L 61,80 C 61,80 61,66 50,66 C 39,66 39,80 39,80 L 20,80 L 20,61 C 20,61 6,61 6,50 C 6,39 20,39 20,39 Z" fill="#10B981" fill-opacity="0.3" stroke="#10B981" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg></span>Onbeperkte klassen</li>
+          <li class="pricing-feature"><span class="pricing-feature-check"><svg width="16" height="16" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 20,20 L 39,20 C 39,20 39,6 50,6 C 61,6 61,20 61,20 L 80,20 L 80,39 C 80,39 66,39 66,50 C 66,61 80,61 80,61 L 80,80 L 61,80 C 61,80 61,66 50,66 C 39,66 39,80 39,80 L 20,80 L 20,61 C 20,61 6,61 6,50 C 6,39 20,39 20,39 Z" fill="#10B981" fill-opacity="0.3" stroke="#10B981" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg></span>Updates & nieuwe modules</li>
+          <li class="pricing-feature"><span class="pricing-feature-check"><svg width="16" height="16" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M 20,20 L 39,20 C 39,20 39,6 50,6 C 61,6 61,20 61,20 L 80,20 L 80,39 C 80,39 66,39 66,50 C 66,61 80,61 80,61 L 80,80 L 61,80 C 61,80 61,66 50,66 C 39,66 39,80 39,80 L 20,80 L 20,61 C 20,61 6,61 6,50 C 6,39 20,39 20,39 Z" fill="#10B981" fill-opacity="0.3" stroke="#10B981" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/></svg></span>AI-beleidssessie directie</li>
+        </ul>
+        <a href="#contact" class="btn btn--outline btn--full">Neem contact op</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- PHOTOS -->
+<section class="section photos-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">In de praktijk</span>
+      <h2>Leren door te doen</h2>
+      <p>Onze workshops zijn hands-on, energiek en op een speelse manier — kinderen én docenten gaan enthousiast naar huis.</p>
+    </div>
+    <div class="photos-grid reveal">
+      <div class="photo-item photo-item--large">
+        <!-- Vervang src met jouw foto -->
+        <!-- <img src="foto1.jpg" alt="Kinderen puzzelen samen"> -->
+        <div class="photo-placeholder">
+          <svg width="48" height="48" viewBox="0 0 100 100" fill="none"><path d="M20,20 L38,20 C38,20 38,6 50,6 C62,6 62,20 62,20 L80,20 Q90,20 90,30 L90,80 Q90,90 80,90 L20,90 Q10,90 10,80 L10,30 Q10,20 20,20 Z" stroke="#94A3B8" stroke-width="3" stroke-linejoin="round"/><circle cx="50" cy="57" r="16" stroke="#94A3B8" stroke-width="3"/></svg>
+          <span>Jouw foto hier<br>Aanbevolen: kinderen die puzzelen of samenwerken</span>
+        </div>
+        <div class="photo-item__label">Samen leren</div>
+      </div>
+      <div class="photo-item">
+        <!-- <img src="foto2.jpg" alt="Workshop in de klas"> -->
+        <div class="photo-placeholder">
+          <svg width="36" height="36" viewBox="0 0 100 100" fill="none"><path d="M20,20 L38,20 C38,20 38,6 50,6 C62,6 62,20 62,20 L80,20 Q90,20 90,30 L90,80 Q90,90 80,90 L20,90 Q10,90 10,80 L10,30 Q10,20 20,20 Z" stroke="#94A3B8" stroke-width="3" stroke-linejoin="round"/><circle cx="50" cy="57" r="16" stroke="#94A3B8" stroke-width="3"/></svg>
+          <span>Workshop in de klas</span>
+        </div>
+        <div class="photo-item__label">Workshop</div>
+      </div>
+      <div class="photo-item">
+        <!-- <img src="foto3.jpg" alt="Blije leerlingen"> -->
+        <div class="photo-placeholder">
+          <svg width="36" height="36" viewBox="0 0 100 100" fill="none"><path d="M20,20 L38,20 C38,20 38,6 50,6 C62,6 62,20 62,20 L80,20 Q90,20 90,30 L90,80 Q90,90 80,90 L20,90 Q10,90 10,80 L10,30 Q10,20 20,20 Z" stroke="#94A3B8" stroke-width="3" stroke-linejoin="round"/><circle cx="50" cy="57" r="16" stroke="#94A3B8" stroke-width="3"/></svg>
+          <span>Blije leerlingen</span>
+        </div>
+        <div class="photo-item__label">Resultaat</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="section testimonial-section">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Ervaringen</span>
+      <h2>Wat scholen zeggen</h2>
+      <p>Wij werken samen met scholen die AI serieus nemen.</p>
+    </div>
+    <div class="testimonial-grid">
+      <div class="testimonial-card reveal reveal-delay-1">
+        <div class="testimonial-stars"></div>
+        <blockquote>"De workshop was een eye-opener voor onze docenten. Eindelijk een praktische aanpak zonder al het technische jargon."</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">MV</div>
+          <div>
+            <div class="testimonial-name">Mieke van der Berg</div>
+            <div class="testimonial-role">Teamleider · Dalton Lyceum</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-2">
+        <div class="testimonial-stars"></div>
+        <blockquote>"Onze leerlingen gingen enthousiast naar huis. De module over social media risico's was precies wat we zochten."</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">JK</div>
+          <div>
+            <div class="testimonial-name">Johan Kramer</div>
+            <div class="testimonial-role">Rector · Stedelijk Gymnasium</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal reveal-delay-3">
+        <div class="testimonial-stars"></div>
+        <blockquote>"Het jaarabonnement is de beste investering die we dit schooljaar hebben gedaan. Echt een aanrader voor elke school."</blockquote>
+        <div class="testimonial-author">
+          <div class="testimonial-avatar">SH</div>
+          <div>
+            <div class="testimonial-name">Sandra Hoekstra</div>
+            <div class="testimonial-role">Directeur · Basisschool De Linde</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="section contact-section" id="contact">
+  <div class="container">
+    <div class="section-header reveal">
+      <span class="eyebrow">Contact</span>
+      <h2>Gratis kennismaken?</h2>
+      <p>Vertel ons over je school en we plannen een vrijblijvend gesprek van 30 minuten.</p>
+    </div>
+    <div class="contact-form reveal">
+      <div class="form-row">
+        <div class="form-group">
+          <label>Naam</label>
+          <input type="text" placeholder="Jan de Vries">
+        </div>
+        <div class="form-group">
+          <label>School</label>
+          <input type="text" placeholder="Naam van de school">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>E-mailadres</label>
+        <input type="email" placeholder="jan@school.nl">
+      </div>
+      <div class="form-group">
+        <label>Functie</label>
+        <select>
+          <option value="">Kies je functie...</option>
+          <option>Docent</option>
+          <option>Teamleider</option>
+          <option>Rector / Directeur</option>
+          <option>Bestuurslid</option>
+          <option>Anders</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Interesse in</label>
+        <select>
+          <option value="">Kies een module of pakket...</option>
+          <option>Wat is AI? (leerlingen)</option>
+          <option>Social media & risico's</option>
+          <option>AI in de klas (docenten)</option>
+          <option>AI creatief gebruiken</option>
+          <option>AI-beleid (directie)</option>
+          <option>Pakket — 3 modules</option>
+          <option>Jaarabonnement</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Bericht</label>
+        <textarea placeholder="Vertel iets over je school en wat je zoekt..."></textarea>
+      </div>
+      <button class="btn btn--primary form-submit" onclick="handleSubmit(event)">Verstuur aanvraag →</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__grid">
+      <div class="footer__brand">
+        <div class="nav__logo">AM<em>AI</em></div>
+        <p>Speciaal voor scholen in Nederland. Leerlingen groeien op met AI. Snapt jouw school het ook? Wij komen langs met praktische workshops die leerlingen, docenten én directie écht verder helpen — begrijpelijk, veilig en op een speelse manier.</p>
+      </div>
+      <div>
+        <div class="footer__col-title">Modules</div>
+        <ul class="footer__links">
+          <li><a href="#modules">Wat is AI?</a></li>
+          <li><a href="#modules">Social media & risico's</a></li>
+          <li><a href="#modules">AI in de klas</a></li>
+          <li><a href="#modules">AI creatief</a></li>
+          <li><a href="#modules">AI-beleid</a></li>
+        </ul>
+      </div>
+      <div>
+        <div class="footer__col-title">Contact</div>
+        <ul class="footer__links">
+          <li><a href="#contact">Gratis kennismaken</a></li>
+          <li><a href="#pakketten">Pakketten & prijzen</a></li>
+          <li><a href="mailto:info@amai.online">info@amai.online</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__bottom">
+      <span>© 2026 AMAI. Alle rechten voorbehouden.</span>
+      <span>amai.online</span>
+    </div>
+  </div>
+</footer>
+
+
+<script src="script.js"></script>
+<script>
+
+// NAV SCROLL
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+});
+
+// HAMBURGER
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+hamburger.addEventListener('click', () => {
+  mobileMenu.classList.toggle('open');
+});
+function closeMobile() {
+  mobileMenu.classList.remove('open');
+}
+
+// CANVAS — KNIKKERS + PUZZELSTUKJES
+const canvas = document.getElementById('heroCanvas');
+const ctx = canvas.getContext('2d');
+let pieces = [], W, H, animId;
+
+const COLORS = [
+  { r:245, g:158, b:11  },  // geel
+  { r:124, g:58,  b:237 },  // paars
+  { r:37,  g:99,  b:235 },  // blauw
+  { r:14,  g:165, b:233 },  // teal
+  { r:16,  g:185, b:129 },  // groen
+  { r:255, g:107, b:107 },  // koraal
+];
+
+function resize() {
+  W = canvas.width  = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+
+// Draw a puzzle piece path centered at (0,0) with given size
+function puzzlePath(ctx, size, topOut, rightOut, bottomOut, leftOut) {
+  const h = size / 2;
+  const b = size * 0.20;  // body margin from center
+  const nd = size * 0.15; // nub depth
+  const nw = size * 0.12; // nub half-width
+
+  ctx.beginPath();
+  ctx.moveTo(-h + b, -h + b); // top-left corner
+
+  // TOP edge
+  ctx.lineTo(-nw, -h + b);
+  if (topOut) {
+    ctx.bezierCurveTo(-nw, -h + b, -nw, -h + b - nd, 0, -h + b - nd);
+    ctx.bezierCurveTo(nw, -h + b - nd, nw, -h + b, nw, -h + b);
+  } else {
+    ctx.bezierCurveTo(-nw, -h + b, -nw, -h + b + nd, 0, -h + b + nd);
+    ctx.bezierCurveTo(nw, -h + b + nd, nw, -h + b, nw, -h + b);
+  }
+  ctx.lineTo(h - b, -h + b); // top-right corner
+
+  // RIGHT edge
+  ctx.lineTo(h - b, -nw);
+  if (rightOut) {
+    ctx.bezierCurveTo(h - b, -nw, h - b + nd, -nw, h - b + nd, 0);
+    ctx.bezierCurveTo(h - b + nd, nw, h - b, nw, h - b, nw);
+  } else {
+    ctx.bezierCurveTo(h - b, -nw, h - b - nd, -nw, h - b - nd, 0);
+    ctx.bezierCurveTo(h - b - nd, nw, h - b, nw, h - b, nw);
+  }
+  ctx.lineTo(h - b, h - b); // bottom-right corner
+
+  // BOTTOM edge
+  ctx.lineTo(nw, h - b);
+  if (bottomOut) {
+    ctx.bezierCurveTo(nw, h - b, nw, h - b + nd, 0, h - b + nd);
+    ctx.bezierCurveTo(-nw, h - b + nd, -nw, h - b, -nw, h - b);
+  } else {
+    ctx.bezierCurveTo(nw, h - b, nw, h - b - nd, 0, h - b - nd);
+    ctx.bezierCurveTo(-nw, h - b - nd, -nw, h - b, -nw, h - b);
+  }
+  ctx.lineTo(-h + b, h - b); // bottom-left corner
+
+  // LEFT edge
+  ctx.lineTo(-h + b, nw);
+  if (leftOut) {
+    ctx.bezierCurveTo(-h + b, nw, -h + b - nd, nw, -h + b - nd, 0);
+    ctx.bezierCurveTo(-h + b - nd, -nw, -h + b, -nw, -h + b, -nw);
+  } else {
+    ctx.bezierCurveTo(-h + b, nw, -h + b + nd, nw, -h + b + nd, 0);
+    ctx.bezierCurveTo(-h + b + nd, -nw, -h + b, -nw, -h + b, -nw);
+  }
+
+  ctx.closePath();
+}
+
+function initPieces() {
+  pieces = [];
+  const count = Math.min(Math.floor((W * H) / 16000), 55);
+  for (let i = 0; i < count; i++) {
+    const c = COLORS[Math.floor(Math.random() * COLORS.length)];
+    const isPuzzle = Math.random() > 0.45;
+    pieces.push({
+      x:     Math.random() * W,
+      y:     Math.random() * H,
+      vx:    (Math.random() - 0.5) * 0.4,
+      vy:    (Math.random() - 0.5) * 0.4,
+      rot:   Math.random() * Math.PI * 2,
+      vrot:  (Math.random() - 0.5) * 0.012,
+      size:  isPuzzle ? Math.random() * 55 + 35 : Math.random() * 28 + 14,
+      alpha: Math.random() * 0.45 + 0.2,
+      r: c.r, g: c.g, b: c.b,
+      type:  isPuzzle ? 'puzzle' : 'marble',
+      topOut:    Math.random() > 0.5,
+      rightOut:  Math.random() > 0.5,
+      bottomOut: Math.random() > 0.5,
+      leftOut:   Math.random() > 0.5
+    });
+  }
+}
+
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+
+  for (let p of pieces) {
+    // Move
+    p.x   += p.vx;
+    p.y   += p.vy;
+    p.rot += p.vrot;
+
+    // Wrap around edges smoothly
+    const pad = p.size * 1.5;
+    if (p.x < -pad) p.x = W + pad;
+    if (p.x > W + pad) p.x = -pad;
+    if (p.y < -pad) p.y = H + pad;
+    if (p.y > H + pad) p.y = -pad;
+
+    // Draw
+    ctx.save();
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rot);
+
+    if (p.type === 'puzzle') {
+      puzzlePath(ctx, p.size, p.topOut, p.rightOut, p.bottomOut, p.leftOut);
+      ctx.fillStyle = `rgba(${p.r},${p.g},${p.b},${p.alpha * 0.22})`;
+      ctx.fill();
+      ctx.strokeStyle = `rgba(${p.r},${p.g},${p.b},${p.alpha})`;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    } else {
+      // Knikker — glanzende bol
+      const r = p.size / 2;
+      ctx.beginPath();
+      ctx.arc(0, 0, r, 0, Math.PI * 2);
+      const grad = ctx.createRadialGradient(-r*0.3, -r*0.3, r*0.05, 0, 0, r);
+      grad.addColorStop(0, `rgba(255,255,255,0.55)`);
+      grad.addColorStop(0.3, `rgba(${p.r},${p.g},${p.b},${p.alpha})`);
+      grad.addColorStop(1, `rgba(${Math.max(0,p.r-60)},${Math.max(0,p.g-60)},${Math.max(0,p.b-60)},${p.alpha})`);
+      ctx.fillStyle = grad;
+      ctx.fill();
+      // Glansstreepje
+      ctx.beginPath();
+      ctx.arc(-r*0.28, -r*0.28, r*0.18, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(255,255,255,0.4)`;
+      ctx.fill();
+    }
+
+    ctx.restore();
+  }
+
+  // Draw soft connection lines between nearby pieces
+  for (let i = 0; i < pieces.length; i++) {
+    for (let j = i + 1; j < pieces.length; j++) {
+      const dx = pieces[i].x - pieces[j].x;
+      const dy = pieces[i].y - pieces[j].y;
+      const dist = Math.sqrt(dx*dx + dy*dy);
+      const maxDist = 180;
+      if (dist < maxDist) {
+        const a = (1 - dist / maxDist) * 0.06;
+        const ri = Math.round((pieces[i].r + pieces[j].r) / 2);
+        const gi = Math.round((pieces[i].g + pieces[j].g) / 2);
+        const bi = Math.round((pieces[i].b + pieces[j].b) / 2);
+        ctx.beginPath();
+        ctx.moveTo(pieces[i].x, pieces[i].y);
+        ctx.lineTo(pieces[j].x, pieces[j].y);
+        ctx.strokeStyle = `rgba(${ri},${gi},${bi},${a})`;
+        ctx.lineWidth = 0.8;
+        ctx.stroke();
+      }
+    }
+  }
+
+  animId = requestAnimationFrame(draw);
+}
+
+resize();
+initPieces();
+draw();
+
+window.addEventListener('resize', () => {
+  cancelAnimationFrame(animId);
+  resize();
+  initPieces();
+  draw();
+});
+
+// SCROLL REVEAL
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12 });
+reveals.forEach(el => observer.observe(el));
+
+// FORM SUBMIT
+function handleSubmit(e) {
+  e.preventDefault();
+  const btn = e.target;
+  btn.textContent = ' Verstuurd! We nemen snel contact op.';
+  btn.style.background = '#10B981';
+  btn.disabled = true;
+}
+
+</script>
+</body>
+</html>
