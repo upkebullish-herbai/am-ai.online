@@ -48,6 +48,7 @@
 </div>
 
 <div class="board" id="board"></div>
+<div class="mobile-quiz" id="mobileQuiz"></div>
 </main>
 
 
@@ -222,6 +223,96 @@ function renderPieces() {
   setTimeout(applyPuzzleShapes, 60);
 }
 
+// ─── MOBILE CARD QUIZ ──────────────────────────────────────────────────────
+const mq = { idx: 0 };
+
+function renderMobileCard() {
+  const quiz = document.getElementById('mobileQuiz');
+  if (!quiz) return;
+  const i   = mq.idx;
+  const p   = PIECES[i];
+  const isDone   = unlocked.has(p.id);
+  const isLocked = p.unlockAfter > 0 && !unlocked.has(p.unlockAfter);
+
+  const dots = PIECES.map((_, di) =>
+    `<div class="mq-dot${di < i ? ' mq-dot--done' : di === i ? ' mq-dot--active' : ''}"></div>`
+  ).join('');
+
+  quiz.innerHTML = `
+    <div class="mq-header">
+      <span class="mq-step">Stukje ${i + 1} van ${PIECES.length}</span>
+      <div class="mq-dots">${dots}</div>
+    </div>
+    <div class="mq-scene">
+      <div class="mq-card${isDone ? ' flipped' : ''}" id="mqCard" style="--piece-color:${p.color}">
+        <div class="mq-front">
+          <div class="mq-icon">${p.icon}</div>
+          <div class="mq-num">${p.number}</div>
+          <div class="mq-q">${p.question}</div>
+          <div class="mq-hint">${p.hint}</div>
+          ${isLocked
+            ? `<div class="mq-lock">🔒 Ontgrendel stukje ${p.unlockAfter} eerst</div>`
+            : `<button class="mq-flip-btn" onclick="mqFlip()">Ontdek het antwoord</button>`
+          }
+        </div>
+        <div class="mq-back">
+          <div class="mq-back-meta">${p.label}</div>
+          <div class="mq-back-title">${p.title}</div>
+          <div class="mq-back-text">${p.explain}</div>
+          <div class="mq-back-example">${p.example}</div>
+          <div class="mq-back-tags">${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+          ${i < PIECES.length - 1
+            ? `<button class="mq-next-btn" onclick="mqNext()">Volgende vraag →</button>`
+            : `<button class="mq-next-btn" onclick="mqFinish()">Bekijk resultaat 🎉</button>`
+          }
+        </div>
+      </div>
+    </div>`;
+}
+
+function mqFlip() {
+  const card = document.getElementById('mqCard');
+  if (!card || card.classList.contains('flipped')) return;
+  card.classList.add('flipped');
+  const p = PIECES[mq.idx];
+  if (!unlocked.has(p.id)) {
+    unlocked.add(p.id);
+    updateProgress();
+    spawnConfetti(p.color);
+    PIECES.filter(dep => dep.unlockAfter === p.id).forEach(dep => {
+      const el = document.querySelector(`.piece[data-id="${dep.id}"]`);
+      if (el) {
+        el.classList.remove('piece--locked');
+        const lh = el.querySelector('[data-lock-hint]');
+        if (lh) lh.outerHTML = `<div class="piece__tap">Tik om te ontdekken</div>`;
+      }
+    });
+    if (unlocked.size === PIECES.length) {
+      setTimeout(() => {
+        document.getElementById('robotIntroText').style.display = 'none';
+        document.getElementById('robotBubble').classList.add('show');
+        startTypewriter(
+          'Wauw, geweldig gedaan! 🎉 Je snapt nu hoe AI écht werkt — van data verzamelen op het internet, patronen leren, een taalmodel trainen, antwoorden voorspellen, tot een AI Agent die zelfstandig handelt. Misschien word jij wel de AI-expert van jouw klas. 🚀',
+          document.getElementById('robotText'),
+          document.getElementById('robotCursor'),
+          28
+        );
+      }, 700);
+    }
+  }
+}
+
+function mqNext() {
+  if (mq.idx < PIECES.length - 1) {
+    mq.idx++;
+    renderMobileCard();
+  }
+}
+
+function mqFinish() {
+  document.getElementById('robotBubble').scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
 // ─── PUZZLE CLIP-PATH SHAPES ───────────────────────────────────────────────
 // 3×2 grid nub directions [top, right, bottom, left] — 'f'=flat, 'o'=tab-out, 'i'=socket-in
 const PIECE_NUBS = [
@@ -372,6 +463,8 @@ function resetAll() {
   document.getElementById('robotText').textContent = '';
   document.getElementById('robotIntroText').style.display = '';
   renderPieces();
+  mq.idx = 0;
+  renderMobileCard();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
@@ -434,6 +527,7 @@ function initFloaters() {
 initFloaters();
 renderPieces();
 updateProgress();
+renderMobileCard();
 
 // Typ de introductietekst bij laden
 startTypewriter(

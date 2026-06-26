@@ -185,103 +185,104 @@ body { min-height: 100vh; }
 
 main { position: relative; z-index: 1; }
 
-/* ── MOBILE: verticale journey, geen puzzelvormen ── */
-@media (max-width: 640px) {
-  .header { padding: 1.25rem 1rem 0.75rem; }
-  .header__title { font-size: clamp(1.5rem, 7vw, 2rem); }
-  .header__sub { font-size: 0.85rem; margin-bottom: 0; }
+/* ── MOBILE CARD QUIZ ── */
+.mobile-quiz { display: none; }
 
-  .progress-wrap { padding: 0 1rem; }
+@media (max-width: 640px) {
+  /* Verberg desktop puzzelbord, toon card quiz */
+  .board        { display: none !important; }
+  .mobile-quiz  { display: block; padding: 0 1rem 2rem; }
+
+  /* Header compact */
+  .header { padding: 1.25rem 1rem 0.5rem; }
+  .header__title { font-size: clamp(1.4rem, 7vw, 2rem); }
+  .header__sub { font-size: 0.85rem; }
+  .progress-wrap { padding: 0 1rem; margin-bottom: 0.75rem; }
 
   /* Robot intro compact */
-  .robot-intro { gap: 0.75rem; padding: 0.875rem 1rem; margin: 0.75rem 1rem 1rem; }
-  .robot-intro__img { width: 56px; height: 56px; }
+  .robot-intro { gap: 0.75rem; padding: 0.875rem 1rem; margin: 0.5rem 0 0.75rem; }
+  .robot-intro__img { width: 52px; height: 52px; }
+  .robot-intro__typed { font-size: 0.82rem; }
   .robot-bubble { padding: 1rem 1.25rem; }
   .robot-bubble__text { font-size: 0.875rem; }
 
-  /* Journey board: 1 kolom, verticaal gestapeld */
-  .board {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-    margin: 0.5rem auto 2rem;
-    padding: 0 1rem;
-    /* Verbindingslijn tussen kaarten */
-    position: relative;
+  /* ── Quiz header ── */
+  .mq-header {
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 0.875rem;
   }
-  .board::before {
-    content: '';
-    position: absolute;
-    left: 2rem; top: 28px; bottom: 28px;
-    width: 2px;
-    background: repeating-linear-gradient(
-      to bottom,
-      rgba(255,255,255,0.12) 0px, rgba(255,255,255,0.12) 6px,
-      transparent 6px, transparent 14px
-    );
-    z-index: 0;
+  .mq-step { font-size: 0.78rem; font-weight: 700; color: var(--color-muted); letter-spacing: 0.05em; text-transform: uppercase; }
+  .mq-dots { display: flex; gap: 5px; align-items: center; }
+  .mq-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,0.12); transition: all 0.3s; }
+  .mq-dot--active { width: 18px; border-radius: 4px; background: var(--color-white); }
+  .mq-dot--done { background: #10B981; }
+
+  /* ── 3D flip scene ── */
+  .mq-scene { perspective: 900px; height: 380px; margin-bottom: 0; }
+  .mq-card {
+    width: 100%; height: 100%; position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .mq-card.flipped { transform: rotateY(180deg); }
+
+  .mq-front, .mq-back {
+    position: absolute; inset: 0;
+    backface-visibility: hidden; -webkit-backface-visibility: hidden;
+    border-radius: 20px;
+    padding: 1.4rem 1.25rem 1.25rem;
+    display: flex; flex-direction: column; gap: 0.6rem;
+    background: #111D35;
+    border: 1.5px solid rgba(255,255,255,0.08);
+  }
+  /* Gekleurde bovenrand */
+  .mq-front::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
+    background: var(--piece-color); border-radius: 20px 20px 0 0;
+  }
+  .mq-back {
+    transform: rotateY(180deg);
+    border-color: var(--piece-color);
+    overflow-y: auto;
   }
 
-  /* Kaart stijl — links gekleurde rand, geen SVG-puzzel */
-  .piece {
-    background: var(--color-bg-card, #111D35);
-    border: 1px solid rgba(255,255,255,0.07);
-    border-left: 4px solid var(--piece-color);
-    border-radius: 14px;
-    padding: 1rem 1rem 1rem 3.5rem;
-    position: relative;
-    margin-bottom: 0.6rem;
-    overflow: visible;
-    transform: none !important;
-    filter: none !important;
+  /* Front content */
+  .mq-icon { width: 40px; height: 40px; }
+  .mq-num  { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--piece-color); }
+  .mq-q    { font-size: 1.15rem; font-weight: 800; line-height: 1.3; color: #fff; flex: 1; }
+  .mq-hint { font-size: 0.8rem; color: var(--color-muted); }
+  .mq-lock { font-size: 0.8rem; color: var(--color-muted); background: rgba(255,255,255,0.05); border-radius: 10px; padding: 0.75rem; }
+
+  .mq-flip-btn {
+    margin-top: auto;
+    background: var(--piece-color); color: #000;
+    font-weight: 800; font-size: 0.95rem;
+    border: none; border-radius: 12px;
+    padding: 0.9rem 1rem; width: 100%;
+    cursor: pointer; transition: opacity 0.15s;
   }
-  /* Stap-cirkel op de lijn */
-  .piece::before {
-    content: attr(data-step);
-    position: absolute;
-    left: -0.05rem; top: 1rem;
-    width: 28px; height: 28px;
-    background: var(--piece-color);
-    border-radius: 50%;
-    font-size: 0.7rem; font-weight: 800; color: #000;
-    display: flex; align-items: center; justify-content: center;
-    z-index: 2;
-    transform: translateX(-50%);
-    box-shadow: 0 0 0 3px var(--color-bg, #060f1e);
+  .mq-flip-btn:active { opacity: 0.75; }
+
+  /* Back content */
+  .mq-back-meta  { font-size: 0.68rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--piece-color); }
+  .mq-back-title { font-size: 1.05rem; font-weight: 800; color: #fff; }
+  .mq-back-text  { font-size: 0.83rem; color: var(--color-muted); line-height: 1.65; }
+  .mq-back-example {
+    background: rgba(255,255,255,0.04);
+    border-left: 3px solid var(--piece-color);
+    border-radius: 0 8px 8px 0;
+    padding: 0.6rem 0.75rem;
+    font-size: 0.78rem; color: #fff; line-height: 1.6;
   }
-  /* Verberg puzzel-SVG op mobiel */
-  .piece__bg { display: none !important; }
-  /* Verberg done-badge (vervangen door step-cirkel) */
-  .piece--done::after { display: none; }
+  .mq-back-tags { display: flex; flex-wrap: wrap; gap: 0.3rem; }
 
-  /* Done: groene stap-cirkel */
-  .piece--done::before { content: '✓'; background: #10B981; }
-  .piece--done { border-left-color: #10B981; opacity: 1; }
-  .piece--done .piece__front { opacity: 0.5; pointer-events: none; }
-
-  /* Overlay → inline uitklap op mobiel */
-  .piece--done.piece--open { z-index: 5 !important; }
-  .piece--done.piece--open .piece__back {
-    position: static !important;
-    left: auto; right: auto;
-    border: none;
-    border-top: 1px solid rgba(255,255,255,0.08);
-    border-radius: 0;
-    box-shadow: none;
-    background: transparent;
-    padding: 0.75rem 0 0;
-    margin-top: 0.5rem;
+  .mq-next-btn {
+    margin-top: auto;
+    background: transparent; color: var(--piece-color);
+    font-weight: 700; font-size: 0.9rem;
+    border: 1.5px solid var(--piece-color); border-radius: 12px;
+    padding: 0.8rem 1rem; width: 100%;
+    cursor: pointer; transition: background 0.15s;
   }
-  .piece__close { display: none; }
-
-  /* Locked stap */
-  .piece--locked { opacity: 0.5; }
-  .piece--locked::before { content: '🔒'; font-size: 0.6rem; background: rgba(255,255,255,0.1); color: #fff; }
-
-  .piece__icon { width: 32px; height: 32px; }
-  .piece__number { display: none; } /* stap-nummer zit al in ::before cirkel */
-  .piece__question { font-size: 0.95rem; }
-  .piece__hint, .piece__tap { font-size: 0.78rem; }
-  .piece__explain { font-size: 0.82rem; }
-  .piece__example { font-size: 0.78rem; padding: 0.6rem 0.75rem; }
+  .mq-next-btn:active { background: rgba(255,255,255,0.07); }
 }
