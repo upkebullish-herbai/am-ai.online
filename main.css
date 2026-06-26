@@ -83,8 +83,7 @@
   pointer-events: none;
   z-index: 0;
 }
-.module-card--has-bg .flip-front,
-.module-card--has-bg .flip-back { position: relative; z-index: 1; }
+.module-card--has-bg > * { position: relative; z-index: 1; }
 
 /* FLIP CARD — module-card--flip */
 .module-card--flip { overflow: visible; }
