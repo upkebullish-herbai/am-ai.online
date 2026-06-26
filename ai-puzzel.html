@@ -34,15 +34,19 @@
 </div>
 
 <div class="board" id="board"></div>
-<div class="robot-complete" id="robotComplete">
-  <img src="robot.png" class="robot-complete__img" alt="AMAI Robot">
-  <div class="robot-bubble">
-    <div class="robot-bubble__label">🤖 AMAI Robot zegt:</div>
-    <div class="robot-bubble__text" id="robotText"></div><span class="robot-bubble__cursor" id="robotCursor"></span>
-  </div>
-  <button class="btn" onclick="resetAll()">↺ Opnieuw spelen</button>
-</div>
 </main>
+
+<!-- Robot verschijnt als fullscreen modal als alle stukjes klaar zijn -->
+<div class="robot-modal" id="robotModal">
+  <div class="robot-modal__inner">
+    <img src="robot.png" class="robot-modal__img" alt="AMAI Robot">
+    <div class="robot-bubble">
+      <div class="robot-bubble__label">🤖 AMAI Robot zegt:</div>
+      <div class="robot-bubble__text" id="robotText"></div><span class="robot-bubble__cursor" id="robotCursor"></span>
+    </div>
+    <button class="btn" onclick="resetAll()">↺ Opnieuw spelen</button>
+  </div>
+</div>
 
 
 <script src="script.js"></script>
@@ -174,11 +178,12 @@ function renderPieces() {
         <div class="piece__question">${p.question}</div>
         <div class="piece__hint">${p.hint}</div>
         ${isLocked
-          ? `<div class="piece__hint" style="color:${p.color};margin-top:0.5rem"> Ontgrendel stukje ${p.unlockAfter} eerst</div>`
-          : `<div class="piece__tap"> Tik om te ontdekken</div>`
+          ? `<div class="piece__hint" data-lock-hint style="color:${p.color};margin-top:0.5rem">🔒 Ontgrendel stukje ${p.unlockAfter} eerst</div>`
+          : `<div class="piece__tap">Tik om te ontdekken</div>`
         }
       </div>
       <div class="piece__back">
+        <button class="piece__close" aria-label="Sluiten">×</button>
         <div class="piece__label">${p.label}</div>
         <div class="piece__title">${p.title}</div>
         <div class="piece__explain">${p.explain}</div>
@@ -187,12 +192,28 @@ function renderPieces() {
       </div>
     `;
 
-    if (!isLocked && !isUnlocked) {
-      el.addEventListener('click', () => unlock(p.id));
-    }
-
     board.appendChild(el);
   });
+
+  // Board-level click delegation — no per-piece listeners needed
+  board.onclick = e => {
+    if (e.target.closest('.piece__close')) {
+      e.stopPropagation();
+      e.target.closest('.piece').classList.remove('piece--open');
+      return;
+    }
+    const piece = e.target.closest('.piece');
+    if (!piece) return;
+    if (piece.classList.contains('piece--locked')) return;
+    const id = parseInt(piece.dataset.id);
+    if (piece.classList.contains('piece--done')) {
+      const isOpen = piece.classList.contains('piece--open');
+      document.querySelectorAll('.piece--open').forEach(p => p.classList.remove('piece--open'));
+      if (!isOpen) piece.classList.add('piece--open');
+    } else {
+      unlock(id);
+    }
+  };
 
   // Apply puzzle shapes — small delay so grid has fully laid out
   setTimeout(applyPuzzleShapes, 60);
@@ -287,15 +308,26 @@ window.addEventListener('resize', () => setTimeout(applyPuzzleShapes, 60));
 function unlock(id) {
   unlocked.add(id);
   updateProgress();
-  renderPieces();
-
   spawnConfetti(PIECES.find(p => p.id === id).color);
+
+  // Close any open overlays, open this one
+  document.querySelectorAll('.piece--open').forEach(p => p.classList.remove('piece--open'));
+  const piece = document.querySelector(`.piece[data-id="${id}"]`);
+  if (piece) piece.classList.add('piece--done', 'piece--open');
+
+  // Unblock pieces that were waiting for this id
+  PIECES.filter(p => p.unlockAfter === id).forEach(p => {
+    const el = document.querySelector(`.piece[data-id="${p.id}"]`);
+    if (!el) return;
+    el.classList.remove('piece--locked');
+    const lockHint = el.querySelector('[data-lock-hint]');
+    if (lockHint) lockHint.outerHTML = `<div class="piece__tap">Tik om te ontdekken</div>`;
+  });
 
   if (unlocked.size === PIECES.length) {
     setTimeout(() => {
-      const rc = document.getElementById('robotComplete');
-      rc.classList.add('show');
-      rc.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const modal = document.getElementById('robotModal');
+      modal.classList.add('show');
       startTypewriter(
         'Wauw, geweldig gedaan! 🎉 Je snapt nu hoe AI écht werkt — van data verzamelen op het internet, patronen leren, een taalmodel trainen, antwoorden voorspellen, tot een AI Agent die zelfstandig handelt. Dat weten veel volwassenen nog niet! Misschien word jij wel de AI-expert van jouw klas. 🚀',
         document.getElementById('robotText'),
@@ -331,9 +363,9 @@ function updateProgress() {
 function resetAll() {
   unlocked.clear();
   updateProgress();
-  renderPieces();
-  document.getElementById('robotComplete').classList.remove('show');
+  document.getElementById('robotModal').classList.remove('show');
   document.getElementById('robotText').textContent = '';
+  renderPieces();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
