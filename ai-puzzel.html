@@ -22,7 +22,27 @@
   <a href="amai-online.html" class="header__back">← Terug naar AMAI</a>
   <div class="header__eyebrow">Interactieve les · 10–14 jaar</div>
   <h1 class="header__title">De Grote AI <span>Puzzel</span></h1>
-  <p class="header__sub">Klik op een puzzelstukje om te ontdekken hoe AI écht werkt. Ontgrendel ze allemaal!</p>
+  <p class="header__sub">Ontgrendel alle 6 stukjes en word een echte AI-specialist!</p>
+</div>
+
+<!-- Robot + intro naast elkaar in de lege ruimte -->
+<div class="robot-intro">
+  <img src="robot.png" class="robot-intro__img" alt="AMAI Robot" id="robotImg">
+  <div class="robot-intro__text" id="robotIntroText">
+    <p class="robot-intro__greeting">Hoi! Ik ben de AMAI Robot. 👋</p>
+    <p>In deze puzzel leer je hoe AI écht werkt — stap voor stap. Beantwoord alle 6 vragen en ontdek waar AI zijn kennis vandaan haalt, hoe het leert, en wat een AI Agent is. Daarna ben jij de expert!</p>
+    <ul class="robot-intro__list">
+      <li>🧠 Hoe AI zijn kennis verzamelt</li>
+      <li>⚙️ Hoe een taalmodel wordt getraind</li>
+      <li>🤖 Wat een AI Agent zelfstandig kan doen</li>
+    </ul>
+  </div>
+  <!-- Ballon verschijnt als alle stukjes klaar zijn -->
+  <div class="robot-intro__bubble" id="robotBubble">
+    <div class="robot-bubble__label">🤖 AMAI Robot zegt:</div>
+    <div class="robot-bubble__text" id="robotText"></div><span class="robot-bubble__cursor" id="robotCursor"></span>
+    <button class="btn" style="margin-top:1rem" onclick="resetAll()">↺ Opnieuw spelen</button>
+  </div>
 </div>
 
 <div class="progress-wrap">
@@ -35,18 +55,6 @@
 
 <div class="board" id="board"></div>
 </main>
-
-<!-- Robot verschijnt als fullscreen modal als alle stukjes klaar zijn -->
-<div class="robot-modal" id="robotModal">
-  <div class="robot-modal__inner">
-    <img src="robot.png" class="robot-modal__img" alt="AMAI Robot">
-    <div class="robot-bubble">
-      <div class="robot-bubble__label">🤖 AMAI Robot zegt:</div>
-      <div class="robot-bubble__text" id="robotText"></div><span class="robot-bubble__cursor" id="robotCursor"></span>
-    </div>
-    <button class="btn" onclick="resetAll()">↺ Opnieuw spelen</button>
-  </div>
-</div>
 
 
 <script src="script.js"></script>
@@ -326,8 +334,10 @@ function unlock(id) {
 
   if (unlocked.size === PIECES.length) {
     setTimeout(() => {
-      const modal = document.getElementById('robotModal');
-      modal.classList.add('show');
+      // Verberg intro-tekst, toon ballon
+      document.getElementById('robotIntroText').style.display = 'none';
+      const bubble = document.getElementById('robotBubble');
+      bubble.classList.add('show');
       startTypewriter(
         'Wauw, geweldig gedaan! 🎉 Je snapt nu hoe AI écht werkt — van data verzamelen op het internet, patronen leren, een taalmodel trainen, antwoorden voorspellen, tot een AI Agent die zelfstandig handelt. Dat weten veel volwassenen nog niet! Misschien word jij wel de AI-expert van jouw klas. 🚀',
         document.getElementById('robotText'),
@@ -363,8 +373,9 @@ function updateProgress() {
 function resetAll() {
   unlocked.clear();
   updateProgress();
-  document.getElementById('robotModal').classList.remove('show');
+  document.getElementById('robotBubble').classList.remove('show');
   document.getElementById('robotText').textContent = '';
+  document.getElementById('robotIntroText').style.display = '';
   renderPieces();
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
