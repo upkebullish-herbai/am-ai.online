@@ -171,6 +171,7 @@ function renderPieces() {
     el.style.setProperty('--piece-glow', p.glow);
     el.dataset.id = p.id;
     el.dataset.idx = i;
+    el.dataset.step = i + 1;
 
     el.innerHTML = `
       <div class="piece__stripe"></div>

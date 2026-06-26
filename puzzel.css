@@ -185,33 +185,103 @@ body { min-height: 100vh; }
 
 main { position: relative; z-index: 1; }
 
-/* ── MOBILE ── */
+/* ── MOBILE: verticale journey, geen puzzelvormen ── */
 @media (max-width: 640px) {
-  .header { padding: 1.5rem 1rem 1rem; }
-  .header__title { font-size: clamp(1.4rem, 7vw, 2rem); }
-  .header__sub { font-size: 0.875rem; margin-bottom: 1.25rem; }
+  .header { padding: 1.25rem 1rem 0.75rem; }
+  .header__title { font-size: clamp(1.5rem, 7vw, 2rem); }
+  .header__sub { font-size: 0.85rem; margin-bottom: 0; }
 
   .progress-wrap { padding: 0 1rem; }
 
-  .board {
-    grid-template-columns: repeat(2, 1fr);
-    margin: 1rem auto;
-    padding: 0 0.75rem;
-  }
-
-  /* 3×2 → 2×3: 6 pieces in 2 columns, last piece spans full width */
-  .piece { padding: 1rem 0.9rem; }
-  .piece:last-child { grid-column: 1 / -1; }
-
-  .piece__icon { width: 36px; height: 36px; }
-  .piece__question { font-size: 0.9rem; }
-  .piece__hint, .piece__tap { font-size: 0.75rem; }
-  .piece__explain { font-size: 0.8rem; }
-  .piece__example { font-size: 0.78rem; padding: 0.6rem 0.75rem; }
-
-  .robot-intro { flex-direction: column; align-items: center; text-align: center; gap: 0.75rem; padding: 0.875rem 1rem; }
-  .robot-intro__img { width: 64px; height: 64px; }
-  .robot-intro__list { align-items: flex-start; }
+  /* Robot intro compact */
+  .robot-intro { gap: 0.75rem; padding: 0.875rem 1rem; margin: 0.75rem 1rem 1rem; }
+  .robot-intro__img { width: 56px; height: 56px; }
   .robot-bubble { padding: 1rem 1.25rem; }
   .robot-bubble__text { font-size: 0.875rem; }
+
+  /* Journey board: 1 kolom, verticaal gestapeld */
+  .board {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin: 0.5rem auto 2rem;
+    padding: 0 1rem;
+    /* Verbindingslijn tussen kaarten */
+    position: relative;
+  }
+  .board::before {
+    content: '';
+    position: absolute;
+    left: 2rem; top: 28px; bottom: 28px;
+    width: 2px;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(255,255,255,0.12) 0px, rgba(255,255,255,0.12) 6px,
+      transparent 6px, transparent 14px
+    );
+    z-index: 0;
+  }
+
+  /* Kaart stijl — links gekleurde rand, geen SVG-puzzel */
+  .piece {
+    background: var(--color-bg-card, #111D35);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-left: 4px solid var(--piece-color);
+    border-radius: 14px;
+    padding: 1rem 1rem 1rem 3.5rem;
+    position: relative;
+    margin-bottom: 0.6rem;
+    overflow: visible;
+    transform: none !important;
+    filter: none !important;
+  }
+  /* Stap-cirkel op de lijn */
+  .piece::before {
+    content: attr(data-step);
+    position: absolute;
+    left: -0.05rem; top: 1rem;
+    width: 28px; height: 28px;
+    background: var(--piece-color);
+    border-radius: 50%;
+    font-size: 0.7rem; font-weight: 800; color: #000;
+    display: flex; align-items: center; justify-content: center;
+    z-index: 2;
+    transform: translateX(-50%);
+    box-shadow: 0 0 0 3px var(--color-bg, #060f1e);
+  }
+  /* Verberg puzzel-SVG op mobiel */
+  .piece__bg { display: none !important; }
+  /* Verberg done-badge (vervangen door step-cirkel) */
+  .piece--done::after { display: none; }
+
+  /* Done: groene stap-cirkel */
+  .piece--done::before { content: '✓'; background: #10B981; }
+  .piece--done { border-left-color: #10B981; opacity: 1; }
+  .piece--done .piece__front { opacity: 0.5; pointer-events: none; }
+
+  /* Overlay → inline uitklap op mobiel */
+  .piece--done.piece--open { z-index: 5 !important; }
+  .piece--done.piece--open .piece__back {
+    position: static !important;
+    left: auto; right: auto;
+    border: none;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    border-radius: 0;
+    box-shadow: none;
+    background: transparent;
+    padding: 0.75rem 0 0;
+    margin-top: 0.5rem;
+  }
+  .piece__close { display: none; }
+
+  /* Locked stap */
+  .piece--locked { opacity: 0.5; }
+  .piece--locked::before { content: '🔒'; font-size: 0.6rem; background: rgba(255,255,255,0.1); color: #fff; }
+
+  .piece__icon { width: 32px; height: 32px; }
+  .piece__number { display: none; } /* stap-nummer zit al in ::before cirkel */
+  .piece__question { font-size: 0.95rem; }
+  .piece__hint, .piece__tap { font-size: 0.78rem; }
+  .piece__explain { font-size: 0.82rem; }
+  .piece__example { font-size: 0.78rem; padding: 0.6rem 0.75rem; }
 }
