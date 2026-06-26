@@ -194,8 +194,8 @@ function renderPieces() {
     board.appendChild(el);
   });
 
-  // Apply puzzle clip-paths after DOM is painted
-  requestAnimationFrame(() => requestAnimationFrame(applyPuzzleShapes));
+  // Apply puzzle shapes — small delay so grid has fully laid out
+  setTimeout(applyPuzzleShapes, 60);
 }
 
 // ─── PUZZLE CLIP-PATH SHAPES ───────────────────────────────────────────────
@@ -210,8 +210,8 @@ const PIECE_NUBS = [
 ];
 
 function buildPath(W, H, nubs) {
-  const D  = Math.round(Math.min(W, H) * 0.09); // nub depth (~9%)
-  const NW = Math.round(Math.min(W, H) * 0.13); // nub half-width (~13%)
+  const D  = Math.round(Math.min(W, H) * 0.14); // nub depth (~14%)
+  const NW = Math.round(Math.min(W, H) * 0.18); // nub half-width (~18%)
   const CX = Math.round(W / 2);
   const CY = Math.round(H / 2);
   const [top, right, bot, left] = nubs;
@@ -274,11 +274,15 @@ function applyPuzzleShapes() {
     svg.innerHTML =
       `<path d="${pathStr}" fill="#111D35" stroke="${color}" stroke-width="${strokeW}" stroke-linejoin="round" stroke-linecap="round"/>` +
       `<rect x="0" y="0" width="${W}" height="4" fill="${color}" rx="2"/>`;
+
+    // Remove CSS fallback background/border now that SVG shape is in place
+    piece.style.background = 'transparent';
+    piece.style.border     = 'none';
   });
 }
 
 // Reapply on resize so nub positions stay correct
-window.addEventListener('resize', () => requestAnimationFrame(applyPuzzleShapes));
+window.addEventListener('resize', () => setTimeout(applyPuzzleShapes, 60));
 
 function unlock(id) {
   unlocked.add(id);

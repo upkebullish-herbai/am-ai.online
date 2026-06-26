@@ -26,10 +26,10 @@ body { min-height: 100vh; }
   overflow: visible;
 }
 
-/* PUZZLE PIECES — background drawn by inline SVG (.piece__bg) */
+/* PUZZLE PIECES — background drawn by inline SVG (.piece__bg), CSS fallback below */
 .piece {
-  background: transparent;
-  border: none;
+  background: #111D35;
+  border: 1.5px solid var(--color-border);
   border-radius: 0;
   padding: 1.75rem 1.5rem 1.75rem 1.5rem;
   cursor: pointer;
@@ -54,15 +54,15 @@ body { min-height: 100vh; }
 .piece--locked { opacity: 0.45; cursor: not-allowed; }
 .piece--locked:hover { transform: none; filter: none; }
 
-/* SVG background element (injected by JS) */
+/* SVG background element (injected by JS) — z-index:-1 keeps it behind text content */
 .piece__bg {
   position: absolute; top: 0; left: 0;
-  overflow: visible; pointer-events: none; z-index: 0;
+  overflow: visible; pointer-events: none; z-index: -1;
 }
 /* Stripe drawn inside SVG, so remove old ::before */
 .piece__stripe { display: none; }
-.piece__front { display: flex; flex-direction: column; gap: 1rem; }
-.piece__back  { display: none; flex-direction: column; gap: 1rem; animation: flipIn 0.4s ease both; }
+.piece__front { position: relative; z-index: 1; display: flex; flex-direction: column; gap: 1rem; }
+.piece__back  { position: relative; z-index: 1; display: none; flex-direction: column; gap: 1rem; animation: flipIn 0.4s ease both; }
 @keyframes flipIn { from { opacity: 0; transform: scale(0.92); } to { opacity: 1; transform: scale(1); } }
 .piece__icon { width: 52px; height: 52px; display: flex; align-items: center; }
 .piece__number { font-family: var(--font-display); font-size: 0.7rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--piece-color); }
