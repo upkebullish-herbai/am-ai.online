@@ -363,11 +363,55 @@ const canvas = document.getElementById('heroCanvas');
 const ctx = canvas.getContext('2d');
 let figures = [], W, H, animId;
 
-// PNG characters — voeg meer toe door extra entries toe te voegen
 const CHAR_FILES = [
   'astronaut.png',
   'oma.png',
 ];
+
+// Robot fade in/uit staat
+const robot = {
+  state: 'hidden', // hidden | fadein | visible | fadeout
+  alpha: 0,
+  x: 0, y: 0,
+  size: 150,
+  timer: 0,
+  FADE_SPEED: 0.008,
+  VISIBLE_FRAMES: 280,
+  HIDDEN_FRAMES: 180,
+};
+
+function robotNewPos() {
+  robot.x = W * 0.15 + Math.random() * W * 0.7;
+  robot.y = H * 0.15 + Math.random() * H * 0.6;
+}
+
+function updateRobot() {
+  if (!charImages['robot.png']) return;
+  if (robot.state === 'hidden') {
+    robot.timer++;
+    if (robot.timer >= robot.HIDDEN_FRAMES) {
+      robot.timer = 0;
+      robotNewPos();
+      robot.state = 'fadein';
+    }
+  } else if (robot.state === 'fadein') {
+    robot.alpha += robot.FADE_SPEED;
+    if (robot.alpha >= 0.85) { robot.alpha = 0.85; robot.state = 'visible'; }
+  } else if (robot.state === 'visible') {
+    robot.timer++;
+    if (robot.timer >= robot.VISIBLE_FRAMES) { robot.timer = 0; robot.state = 'fadeout'; }
+  } else if (robot.state === 'fadeout') {
+    robot.alpha -= robot.FADE_SPEED;
+    if (robot.alpha <= 0) { robot.alpha = 0; robot.state = 'hidden'; }
+  }
+  if (robot.state !== 'hidden' && robot.alpha > 0) {
+    const img = charImages['robot.png'];
+    ctx.save();
+    ctx.globalAlpha = robot.alpha;
+    ctx.drawImage(img, robot.x - robot.size / 2, robot.y - robot.size / 2, robot.size, robot.size);
+    ctx.restore();
+  }
+}
 
 const charImages = {};
 let loadedCount = 0;
@@ -417,16 +461,19 @@ function draw() {
     ctx.drawImage(img, -f.size / 2, -f.size / 2, f.size, f.size);
     ctx.restore();
   }
+  updateRobot();
   animId = requestAnimationFrame(draw);
 }
 
-// Laad PNG's
-CHAR_FILES.forEach(file => {
+// Laad PNG's (inclusief robot apart)
+const ALL_FILES = [...CHAR_FILES, 'robot.png'];
+const totalFiles = ALL_FILES.length;
+ALL_FILES.forEach(file => {
   const img = new Image();
   img.onload = () => {
     charImages[file] = img;
     loadedCount++;
-    if (loadedCount === CHAR_FILES.length) {
+    if (loadedCount === totalFiles) {
       resize();
       initFigures();
       draw();
