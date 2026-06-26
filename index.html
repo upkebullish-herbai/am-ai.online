@@ -382,23 +382,19 @@ function resize() {
 
 function initFigures() {
   figures = [];
-  const count = Math.min(Math.floor((W * H) / 22000), 30);
   const keys = CHAR_FILES.filter(f => charImages[f]);
   if (!keys.length) return;
-  for (let i = 0; i < count; i++) {
-    const key = keys[Math.floor(Math.random() * keys.length)];
-    figures.push({
-      x:    Math.random() * W,
-      y:    Math.random() * H,
-      vx:   (Math.random() - 0.5) * 0.35,
-      vy:   (Math.random() - 0.5) * 0.35,
-      rot:  Math.random() * Math.PI * 2,
-      vrot: (Math.random() - 0.5) * 0.008,
-      size: Math.random() * 80 + 60,
-      alpha: Math.random() * 0.3 + 0.55,
-      key
-    });
-  }
+  figures.push({
+    x:    Math.random() * W,
+    y:    Math.random() * H,
+    vx:   (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 2 + 1.5),
+    vy:   (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 1.5 + 0.8),
+    rot:  Math.random() * Math.PI * 2,
+    vrot: (Math.random() - 0.5) * 0.02,
+    size: 120,
+    alpha: 0.85,
+    key: keys[0]
+  });
 }
 
 function draw() {
