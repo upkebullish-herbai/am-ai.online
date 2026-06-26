@@ -29,13 +29,7 @@
 <div class="robot-intro">
   <img src="robot.png" class="robot-intro__img" alt="AMAI Robot" id="robotImg">
   <div class="robot-intro__text" id="robotIntroText">
-    <p class="robot-intro__greeting">Hoi! Ik ben de AMAI Robot. 👋</p>
-    <p>In deze puzzel leer je hoe AI écht werkt — stap voor stap. Beantwoord alle 6 vragen en ontdek waar AI zijn kennis vandaan haalt, hoe het leert, en wat een AI Agent is. Daarna ben jij de expert!</p>
-    <ul class="robot-intro__list">
-      <li>🧠 Hoe AI zijn kennis verzamelt</li>
-      <li>⚙️ Hoe een taalmodel wordt getraind</li>
-      <li>🤖 Wat een AI Agent zelfstandig kan doen</li>
-    </ul>
+    <div class="robot-intro__typed" id="robotIntroTyped"></div><span class="robot-bubble__cursor" id="robotIntroCursor"></span>
   </div>
   <!-- Ballon verschijnt als alle stukjes klaar zijn -->
   <div class="robot-intro__bubble" id="robotBubble">
@@ -439,6 +433,14 @@ function initFloaters() {
 initFloaters();
 renderPieces();
 updateProgress();
+
+// Typ de introductietekst bij laden
+startTypewriter(
+  'Hoi! Ik ben AMAI 👋  In deze puzzel leer je hoe AI écht werkt — stap voor stap. Beantwoord alle 6 vragen en ontdek waar AI zijn kennis vandaan haalt, hoe het traint en wat een AI Agent zelfstandig kan doen. Daarna ben jij de expert! 🚀',
+  document.getElementById('robotIntroTyped'),
+  document.getElementById('robotIntroCursor'),
+  22
+);
 
 </script>
 </body>
