@@ -34,10 +34,12 @@
 </div>
 
 <div class="board" id="board"></div>
-<div class="complete" id="complete">
-  <div class="complete__emoji"></div>
-  <h2 class="complete__title">Puzzel voltooid!</h2>
-  <p class="complete__text">Wauw — jij snapt nu hoe AI werkt! Van data verzamelen tot slimme AI-agenten die zelfstandig taken uitvoeren. Dat weten veel volwassenen nog niet eens!</p>
+<div class="robot-complete" id="robotComplete">
+  <img src="robot.png" class="robot-complete__img" alt="AMAI Robot">
+  <div class="robot-bubble">
+    <div class="robot-bubble__label">🤖 AMAI Robot zegt:</div>
+    <div class="robot-bubble__text" id="robotText"></div><span class="robot-bubble__cursor" id="robotCursor"></span>
+  </div>
   <button class="btn" onclick="resetAll()">↺ Opnieuw spelen</button>
 </div>
 </main>
@@ -162,8 +164,10 @@ function renderPieces() {
     el.style.setProperty('--piece-color', p.color);
     el.style.setProperty('--piece-glow', p.glow);
     el.dataset.id = p.id;
+    el.dataset.idx = i;
 
     el.innerHTML = `
+      <div class="piece__stripe"></div>
       <div class="piece__front">
         <div class="piece__icon">${p.icon}</div>
         <div class="piece__number">${p.number}</div>
@@ -189,22 +193,124 @@ function renderPieces() {
 
     board.appendChild(el);
   });
+
+  // Apply puzzle clip-paths after DOM is painted
+  requestAnimationFrame(() => requestAnimationFrame(applyPuzzleShapes));
 }
+
+// ─── PUZZLE CLIP-PATH SHAPES ───────────────────────────────────────────────
+// 3×2 grid nub directions [top, right, bottom, left] — 'f'=flat, 'o'=tab-out, 'i'=socket-in
+const PIECE_NUBS = [
+  ['f','o','o','f'],  // 1: top-left
+  ['f','o','o','i'],  // 2: top-center
+  ['f','f','o','i'],  // 3: top-right
+  ['i','o','f','f'],  // 4: bottom-left
+  ['i','o','f','i'],  // 5: bottom-center
+  ['i','f','f','i'],  // 6: bottom-right
+];
+
+function buildPath(W, H, nubs) {
+  const D  = Math.round(Math.min(W, H) * 0.09); // nub depth (~9%)
+  const NW = Math.round(Math.min(W, H) * 0.13); // nub half-width (~13%)
+  const CX = Math.round(W / 2);
+  const CY = Math.round(H / 2);
+  const [top, right, bot, left] = nubs;
+
+  // helpers
+  const topEdge = () => {
+    if (top === 'f') return `L ${W} 0 `;
+    if (top === 'o') return `L ${CX-NW} 0 C ${CX-NW} ${-D} ${CX+NW} ${-D} ${CX+NW} 0 L ${W} 0 `;
+    return               `L ${CX-NW} 0 C ${CX-NW} ${D}  ${CX+NW} ${D}  ${CX+NW} 0 L ${W} 0 `;
+  };
+  const rightEdge = () => {
+    if (right === 'f') return `L ${W} ${H} `;
+    if (right === 'o') return `L ${W} ${CY-NW} C ${W+D} ${CY-NW} ${W+D} ${CY+NW} ${W} ${CY+NW} L ${W} ${H} `;
+    return                    `L ${W} ${CY-NW} C ${W-D} ${CY-NW} ${W-D} ${CY+NW} ${W} ${CY+NW} L ${W} ${H} `;
+  };
+  const botEdge = () => {
+    if (bot === 'f') return `L 0 ${H} `;
+    if (bot === 'o') return `L ${CX+NW} ${H} C ${CX+NW} ${H+D} ${CX-NW} ${H+D} ${CX-NW} ${H} L 0 ${H} `;
+    return                  `L ${CX+NW} ${H} C ${CX+NW} ${H-D} ${CX-NW} ${H-D} ${CX-NW} ${H} L 0 ${H} `;
+  };
+  const leftEdge = () => {
+    if (left === 'f') return `Z`;
+    if (left === 'o') return `L 0 ${CY+NW} C ${-D} ${CY+NW} ${-D} ${CY-NW} 0 ${CY-NW} Z`;
+    return                   `L 0 ${CY+NW} C ${D}  ${CY+NW} ${D}  ${CY-NW} 0 ${CY-NW} Z`;
+  };
+
+  return `M 0 0 ${topEdge()}${rightEdge()}${botEdge()}${leftEdge()}`;
+}
+
+function applyPuzzleShapes() {
+  const pieces = document.querySelectorAll('.piece[data-idx]');
+  pieces.forEach(piece => {
+    const i   = parseInt(piece.dataset.idx, 10);
+    const nubs = PIECE_NUBS[i] || ['f','f','f','f'];
+    const W   = piece.offsetWidth;
+    const H   = piece.offsetHeight;
+    if (!W || !H) return;
+
+    const color     = PIECES[i]?.color || '#2563EB';
+    const isDone    = piece.classList.contains('piece--done');
+    const bgFill    = isDone
+      ? `color-mix(in srgb, ${color} 14%, #111D35)`
+      : '#111D35';
+    const strokeW   = isDone ? 2.5 : 1.8;
+    const pathStr   = buildPath(W, H, nubs);
+
+    // Remove old SVG if present, inject fresh one
+    let svg = piece.querySelector('.piece__bg');
+    if (!svg) {
+      svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+      svg.classList.add('piece__bg');
+      piece.insertBefore(svg, piece.firstChild);
+    }
+    svg.setAttribute('width', W);
+    svg.setAttribute('height', H);
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    svg.setAttribute('overflow', 'visible');
+    svg.innerHTML =
+      `<path d="${pathStr}" fill="${bgFill}" stroke="${color}" stroke-width="${strokeW}" stroke-linejoin="round" stroke-linecap="round"/>` +
+      `<rect x="0" y="0" width="${W}" height="4" fill="${color}" rx="2"/>`;
+  });
+}
+
+// Reapply on resize so nub positions stay correct
+window.addEventListener('resize', () => requestAnimationFrame(applyPuzzleShapes));
 
 function unlock(id) {
   unlocked.add(id);
   updateProgress();
   renderPieces();
 
-  // Shake confetti
   spawnConfetti(PIECES.find(p => p.id === id).color);
 
   if (unlocked.size === PIECES.length) {
     setTimeout(() => {
-      document.getElementById('complete').classList.add('show');
-      document.getElementById('complete').scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 600);
+      const rc = document.getElementById('robotComplete');
+      rc.classList.add('show');
+      rc.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      startTypewriter(
+        'Wauw, geweldig gedaan! 🎉 Je snapt nu hoe AI écht werkt — van data verzamelen op het internet, patronen leren, een taalmodel trainen, antwoorden voorspellen, tot een AI Agent die zelfstandig handelt. Dat weten veel volwassenen nog niet! Misschien word jij wel de AI-expert van jouw klas. 🚀',
+        document.getElementById('robotText'),
+        document.getElementById('robotCursor'),
+        28
+      );
+    }, 700);
   }
+}
+
+function startTypewriter(text, el, cursor, speed) {
+  el.textContent = '';
+  cursor.style.display = 'inline-block';
+  let i = 0;
+  const tick = setInterval(() => {
+    el.textContent += text[i++];
+    if (i >= text.length) {
+      clearInterval(tick);
+      setTimeout(() => cursor.style.display = 'none', 1200);
+    }
+  }, speed);
 }
 
 function updateProgress() {
@@ -220,7 +326,8 @@ function resetAll() {
   unlocked.clear();
   updateProgress();
   renderPieces();
-  document.getElementById('complete').classList.remove('show');
+  document.getElementById('robotComplete').classList.remove('show');
+  document.getElementById('robotText').textContent = '';
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
