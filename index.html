@@ -366,10 +366,7 @@ let figures = [], W, H, animId;
 // PNG characters — voeg meer toe door extra entries toe te voegen
 const CHAR_FILES = [
   'astronaut.png',
-  // 'office-worker.png',
-  // 'construction-worker.png',
-  // 'robot.png',
-  // 'teacher.png',
+  'oma.png',
 ];
 
 const charImages = {};
@@ -384,16 +381,21 @@ function initFigures() {
   figures = [];
   const keys = CHAR_FILES.filter(f => charImages[f]);
   if (!keys.length) return;
-  figures.push({
-    x:    Math.random() * W,
-    y:    Math.random() * H,
-    vx:   (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 2 + 1.5),
-    vy:   (Math.random() > 0.5 ? 1 : -1) * (Math.random() * 1.5 + 0.8),
-    rot:  Math.random() * Math.PI * 2,
-    vrot: (Math.random() - 0.5) * 0.02,
-    size: 120,
-    alpha: 0.85,
-    key: keys[0]
+  // Astronaut — links naar rechts, bovenste helft
+  if (charImages['astronaut.png']) figures.push({
+    x: -140, y: H * 0.25,
+    vx: 2.2, vy: 0.6,
+    rot: 0, vrot: 0.015,
+    size: 120, alpha: 0.85,
+    key: 'astronaut.png'
+  });
+  // Oma — rechts naar links, onderste helft, trager
+  if (charImages['oma.png']) figures.push({
+    x: W + 140, y: H * 0.65,
+    vx: -1.4, vy: -0.4,
+    rot: 0, vrot: -0.008,
+    size: 130, alpha: 0.85,
+    key: 'oma.png'
   });
 }
 
