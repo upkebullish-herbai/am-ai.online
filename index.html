@@ -9,6 +9,45 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="main.css">
+<style>
+.hero__selector { margin: 2rem 0 0; max-width: 560px; }
+.selector__label { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-muted); margin-bottom: 0.75rem; }
+.selector__options { display: flex; flex-direction: column; gap: 0.5rem; }
+.selector__option {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  cursor: pointer;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+  transition: border-color 0.2s, background 0.2s;
+  position: relative;
+}
+.selector__option:hover { border-color: rgba(37,99,235,0.5); background: rgba(37,99,235,0.06); }
+.selector__option.open { border-color: rgba(37,99,235,0.6); background: rgba(37,99,235,0.08); }
+.selector__arrow { margin-left: auto; font-size: 0.75rem; color: var(--color-muted); transition: transform 0.25s; }
+.selector__option.open .selector__arrow { transform: rotate(180deg); }
+.selector__icon { font-size: 1.1rem; }
+.selector__dropdown {
+  display: none;
+  width: 100%;
+  padding-top: 0.75rem;
+  margin-top: 0.5rem;
+  border-top: 1px solid var(--color-border);
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  line-height: 1.7;
+}
+.selector__option.open .selector__dropdown { display: block; }
+</style>
 </head>
 <body>
 
@@ -45,29 +84,58 @@
     <div class="hero__content">
       <div class="hero__badge">AI-bureau voor het Nederlandse bedrijfsleven</div>
       <h1 class="hero__title">
-        Jouw bedrijf klaar<br>
-        <span class="text-gradient">voor de AI-revolutie</span>
+        Ben je klaar voor<br>
+        <span class="text-gradient">de AI-revolutie?</span>
       </h1>
       <p class="hero__sub">
-        Van automatisering tot ERP-koppelingen, van websites tot maatwerkoplossingen — wij bouwen AI in jouw bedrijf. Praktisch, snel en zonder technisch gedoe.
+        Kies jouw situatie en ontdek wat AMAI voor jou kan betekenen.
       </p>
-      <div class="hero__actions">
+
+      <!-- DOELGROEP DROPDOWN -->
+      <div class="hero__selector">
+        <div class="selector__label">Ik ben een...</div>
+        <div class="selector__options">
+          <div class="selector__option" onclick="toggleDropdown(this)" data-target="mkb">
+            <span class="selector__icon">🏢</span> MKB & ondernemer <span class="selector__arrow">▾</span>
+            <div class="selector__dropdown">
+              <p>Meer doen met minder mensen. Wij automatiseren processen en bouwen tools zodat jij je kunt richten op groei.</p>
+              <a href="#contact" class="btn btn--primary" style="margin-top:1rem; font-size:0.85rem; padding:0.6rem 1.4rem;">Gratis kennismaken ↗</a>
+            </div>
+          </div>
+          <div class="selector__option" onclick="toggleDropdown(this)" data-target="productie">
+            <span class="selector__icon">🏭</span> Productiebedrijf <span class="selector__arrow">▾</span>
+            <div class="selector__dropdown">
+              <p>Machines koppelen aan je ERP, real-time inzicht in je productielijn en slimmere planning — wij maken het mogelijk.</p>
+              <a href="#contact" class="btn btn--primary" style="margin-top:1rem; font-size:0.85rem; padding:0.6rem 1.4rem;">Gratis kennismaken ↗</a>
+            </div>
+          </div>
+          <div class="selector__option" onclick="toggleDropdown(this)" data-target="school">
+            <span class="selector__icon">🎓</span> School of instelling <span class="selector__arrow">▾</span>
+            <div class="selector__dropdown">
+              <p>AI-educatie voor leerlingen, docenten en directie. Praktische workshops die direct toepasbaar zijn in de klas.</p>
+              <a href="#contact" class="btn btn--primary" style="margin-top:1rem; font-size:0.85rem; padding:0.6rem 1.4rem;">Gratis kennismaken ↗</a>
+            </div>
+          </div>
+          <div class="selector__option" onclick="toggleDropdown(this)" data-target="startup">
+            <span class="selector__icon">🚀</span> Startup of scale-up <span class="selector__arrow">▾</span>
+            <div class="selector__dropdown">
+              <p>Snel schalen met de juiste technologie. Wij bouwen mee als technische partner zonder dat je een heel dev-team nodig hebt.</p>
+              <a href="#contact" class="btn btn--primary" style="margin-top:1rem; font-size:0.85rem; padding:0.6rem 1.4rem;">Gratis kennismaken ↗</a>
+            </div>
+          </div>
+          <div class="selector__option" onclick="toggleDropdown(this)" data-target="zzp">
+            <span class="selector__icon">💡</span> ZZP'er of freelancer <span class="selector__arrow">▾</span>
+            <div class="selector__dropdown">
+              <p>AI als persoonlijke assistent. Wij leren je de tools die je productiviteit verdubbelen — zodat jij meer kunt doen in minder tijd.</p>
+              <a href="#contact" class="btn btn--primary" style="margin-top:1rem; font-size:0.85rem; padding:0.6rem 1.4rem;">Gratis kennismaken ↗</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="hero__actions" style="margin-top:2rem;">
         <a href="#contact" class="btn btn--primary">Plan gratis kennismaking ↗</a>
         <a href="#diensten" class="btn btn--outline">Bekijk onze diensten →</a>
-      </div>
-      <div class="hero__stats">
-        <div>
-          <div class="stat-num text-gradient">5+</div>
-          <div class="stat-label">Diensten</div>
-        </div>
-        <div>
-          <div class="stat-num text-gradient">100%</div>
-          <div class="stat-label">Maatwerk</div>
-        </div>
-        <div>
-          <div class="stat-num text-gradient">MKB</div>
-          <div class="stat-label">Gefocust op jou</div>
-        </div>
       </div>
     </div>
   </div>
@@ -341,6 +409,13 @@
 
 <script src="script.js"></script>
 <script>
+
+// DOELGROEP DROPDOWN
+function toggleDropdown(el) {
+  const isOpen = el.classList.contains('open');
+  document.querySelectorAll('.selector__option').forEach(o => o.classList.remove('open'));
+  if (!isOpen) el.classList.add('open');
+}
 
 // NAV SCROLL
 const nav = document.getElementById('nav');
