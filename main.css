@@ -68,6 +68,54 @@
 .module-card--4 { --card-color: #F59E0B; }
 .module-card--5 { --card-color: #7C3AED; }
 
+/* FLIP CARD — module-card--flip */
+.module-card--flip { overflow: visible; }
+.module-card--flip:hover { transform: none; }
+
+.flip-front { display: flex; flex-direction: column; height: 100%; }
+.flip-front__actions { margin-top: 1.25rem; display: flex; gap: 0.6rem; align-items: center; flex-wrap: wrap; }
+
+.flip-trigger {
+  background: transparent; border: 1px solid rgba(255,255,255,0.15);
+  color: var(--color-muted); font-size: 0.8rem; font-weight: 600;
+  padding: 0.55rem 1rem; border-radius: 8px; cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+.flip-trigger:hover { border-color: #10B981; color: #10B981; }
+
+.flip-back {
+  display: none;
+  flex-direction: column; gap: 0.75rem;
+  position: relative;
+}
+.module-card--flip.flipped .flip-front { display: none; }
+.module-card--flip.flipped .flip-back {
+  display: flex;
+  animation: flipReveal 0.3s ease both;
+}
+@keyframes flipReveal {
+  from { opacity: 0; transform: rotateY(-8deg) scale(0.98); }
+  to   { opacity: 1; transform: rotateY(0) scale(1); }
+}
+
+.flip-back__close {
+  position: absolute; top: -0.5rem; right: -0.5rem;
+  width: 26px; height: 26px; border-radius: 50%;
+  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
+  color: var(--color-muted); font-size: 15px; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s;
+}
+.flip-back__close:hover { background: rgba(255,255,255,0.15); color: #fff; }
+
+.flip-back__list { display: flex; flex-direction: column; gap: 0.9rem; list-style: none; padding: 0; margin: 0; }
+.flip-back__list li { display: flex; gap: 0.75rem; align-items: flex-start; }
+.flip-back__icon { font-size: 1.1rem; flex-shrink: 0; margin-top: 1px; }
+.flip-back__list strong { font-size: 0.875rem; color: #fff; display: block; margin-bottom: 0.15rem; }
+.flip-back__list span { font-size: 0.8rem; color: var(--color-muted); line-height: 1.55; }
+
+.flip-back__actions { margin-top: auto; padding-top: 1rem; display: flex; flex-direction: column; gap: 0.5rem; }
+
 /* HOW IT WORKS */
 .how { background: var(--color-bg-card); }
 .how__steps { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 2rem; }

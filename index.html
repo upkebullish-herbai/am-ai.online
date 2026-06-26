@@ -177,24 +177,63 @@
     </div>
     <div class="modules-grid">
 
-      <div class="module-card module-card--1 reveal reveal-delay-1">
-        <div class="module-card__icon">
-          <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>
-          </svg>
+      <div class="module-card module-card--1 module-card--flip reveal reveal-delay-1" id="cardEducatie">
+
+        <!-- VOORKANT -->
+        <div class="flip-front">
+          <div class="module-card__icon">
+            <svg width="44" height="44" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/>
+            </svg>
+          </div>
+          <div class="module-card__tag">Kennisoverdracht</div>
+          <h3>AI Educatie</h3>
+          <p>Wij trainen jouw team zodat ze AI écht begrijpen en direct kunnen toepassen — van medewerkers tot directie.</p>
+          <ul class="module-card__list">
+            <li>Workshops op locatie</li>
+            <li>AI-tools leren gebruiken</li>
+            <li>Strategische sessies directie</li>
+          </ul>
+          <div class="flip-front__actions">
+            <a href="ai-puzzel.html" class="btn btn--outline" style="font-size:0.85rem; padding:0.6rem 1.2rem; display:inline-flex; gap:0.4rem; align-items:center;">
+              <svg width="14" height="14" viewBox="0 0 100 100" fill="none"><path d="M20,20 L39,20 C39,20 39,6 50,6 C61,6 61,20 61,20 L80,20 L80,39 C80,39 94,39 94,50 C94,61 80,61 80,61 L80,80 L61,80 C61,80 61,66 50,66 C39,66 39,80 39,80 L20,80 L20,61 C20,61 6,61 6,50 C6,39 20,39 20,39 Z" fill="#10B981" fill-opacity="0.3" stroke="#10B981" stroke-width="4"/></svg>
+              Doe de AI-puzzel →
+            </a>
+            <button class="flip-trigger" onclick="document.getElementById('cardEducatie').classList.add('flipped')" aria-label="Meer info">
+              Meer info ↗
+            </button>
+          </div>
         </div>
-        <div class="module-card__tag">Kennisoverdracht</div>
-        <h3>AI Educatie</h3>
-        <p>Wij trainen jouw team zodat ze AI écht begrijpen en direct kunnen toepassen — van medewerkers tot directie.</p>
-        <ul class="module-card__list">
-          <li>Workshops op locatie</li>
-          <li>AI-tools leren gebruiken</li>
-          <li>Strategische sessies directie</li>
-        </ul>
-        <a href="ai-puzzel.html" class="btn btn--outline" style="margin-top:1.25rem; font-size:0.85rem; padding:0.6rem 1.2rem; display:inline-flex; gap:0.4rem; align-items:center;">
-          <svg width="14" height="14" viewBox="0 0 100 100" fill="none"><path d="M20,20 L39,20 C39,20 39,6 50,6 C61,6 61,20 61,20 L80,20 L80,39 C80,39 94,39 94,50 C94,61 80,61 80,61 L80,80 L61,80 C61,80 61,66 50,66 C39,66 39,80 39,80 L20,80 L20,61 C20,61 6,61 6,50 C6,39 20,39 20,39 Z" fill="#10B981" fill-opacity="0.3" stroke="#10B981" stroke-width="4"/></svg>
-          Doe de AI-puzzel →
-        </a>
+
+        <!-- ACHTERKANT -->
+        <div class="flip-back">
+          <button class="flip-back__close" onclick="document.getElementById('cardEducatie').classList.remove('flipped')" aria-label="Sluiten">×</button>
+          <div class="module-card__tag" style="margin-bottom:0.75rem">AI Educatie</div>
+          <h3 style="margin-bottom:1rem">Wat krijgt jouw team?</h3>
+          <ul class="flip-back__list">
+            <li>
+              <span class="flip-back__icon">🏫</span>
+              <div><strong>Workshop op locatie</strong><br><span>Halve of hele dag, hands-on oefenen met AI-tools — afgestemd op jouw sector.</span></div>
+            </li>
+            <li>
+              <span class="flip-back__icon">🤖</span>
+              <div><strong>AI-tools in de praktijk</strong><br><span>ChatGPT, Copilot, Claude — we leren je team hoe ze tijd besparen met de juiste prompts.</span></div>
+            </li>
+            <li>
+              <span class="flip-back__icon">📊</span>
+              <div><strong>Sessie voor directie</strong><br><span>Strategisch inzicht: waar zit de winst, welke risico's zijn er, hoe begin je verantwoord?</span></div>
+            </li>
+            <li>
+              <span class="flip-back__icon">🧩</span>
+              <div><strong>Interactieve AI-puzzel</strong><br><span>Gratis les voor de werkvloer — uitleggen hoe AI écht werkt in 6 stappen.</span></div>
+            </li>
+          </ul>
+          <div class="flip-back__actions">
+            <a href="#contact" class="btn" style="font-size:0.85rem; padding:0.65rem 1.2rem; background:#10B981; color:#000; font-weight:700; border-radius:10px; text-decoration:none; text-align:center;">Plan een sessie →</a>
+            <a href="ai-puzzel.html" class="btn btn--outline" style="font-size:0.85rem; padding:0.65rem 1.2rem; text-align:center;">Probeer de puzzel</a>
+          </div>
+        </div>
+
       </div>
 
       <div class="module-card module-card--2 reveal reveal-delay-2">
