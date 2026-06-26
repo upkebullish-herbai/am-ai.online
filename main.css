@@ -68,6 +68,24 @@
 .module-card--4 { --card-color: #F59E0B; }
 .module-card--5 { --card-color: #7C3AED; }
 
+/* CARD WITH BG IMAGE */
+.module-card--has-bg {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+}
+.module-card--has-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(160deg, rgba(6,15,30,0.82) 0%, rgba(6,15,30,0.65) 100%);
+  border-radius: var(--radius-lg);
+  pointer-events: none;
+  z-index: 0;
+}
+.module-card--has-bg .flip-front,
+.module-card--has-bg .flip-back { position: relative; z-index: 1; }
+
 /* FLIP CARD — module-card--flip */
 .module-card--flip { overflow: visible; }
 .module-card--flip:hover { transform: none; }
