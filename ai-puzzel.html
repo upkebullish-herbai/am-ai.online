@@ -252,9 +252,7 @@ function applyPuzzleShapes() {
 
     const color     = PIECES[i]?.color || '#2563EB';
     const isDone    = piece.classList.contains('piece--done');
-    const bgFill    = isDone
-      ? `color-mix(in srgb, ${color} 14%, #111D35)`
-      : '#111D35';
+    const bgFill    = '#111D35';   /* done-state tint handled by CSS filter */
     const strokeW   = isDone ? 2.5 : 1.8;
     const pathStr   = buildPath(W, H, nubs);
 
