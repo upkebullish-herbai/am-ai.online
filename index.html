@@ -10,43 +10,26 @@
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="main.css">
 <style>
-.hero__selector { margin: 2rem 0 0; max-width: 560px; }
-.selector__label { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-muted); margin-bottom: 0.75rem; }
-.selector__options { display: flex; flex-direction: column; gap: 0.5rem; }
-.selector__option {
-  background: rgba(255,255,255,0.04);
-  border: 1px solid var(--color-border);
-  border-radius: var(--radius-md);
-  padding: 0.75rem 1rem;
-  cursor: pointer;
-  font-family: var(--font-display);
-  font-weight: 600;
-  font-size: 0.95rem;
-  display: flex;
-  align-items: center;
-  gap: 0.6rem;
-  flex-wrap: wrap;
-  transition: border-color 0.2s, background 0.2s;
-  position: relative;
-}
-.selector__option:hover { border-color: rgba(37,99,235,0.5); background: rgba(37,99,235,0.06); }
-.selector__option.open { border-color: rgba(37,99,235,0.6); background: rgba(37,99,235,0.08); }
-.selector__arrow { margin-left: auto; font-size: 0.75rem; color: var(--color-muted); transition: transform 0.25s; }
-.selector__option.open .selector__arrow { transform: rotate(180deg); }
-.selector__icon { font-size: 1.1rem; }
-.selector__dropdown {
+/* PUZZLE SELECTOR */
+.puzzle-selector { margin: 2rem 0 0; max-width: 560px; }
+.selector__label { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--color-muted); margin-bottom: 1rem; }
+.pz-svg { overflow: visible; display: block; width: 100%; cursor: pointer; }
+.pz-piece { transition: filter 0.2s ease, transform 0.2s ease; transform-origin: center; transform-box: fill-box; }
+.pz-piece:hover { filter: brightness(1.3) drop-shadow(0 2px 8px rgba(0,0,0,0.4)); transform: scale(1.03); }
+.pz-piece.active { filter: brightness(1.5) drop-shadow(0 4px 16px rgba(0,0,0,0.5)); transform: scale(1.06) translateY(-3px); }
+.pz-shape { transition: fill-opacity 0.2s; }
+.pz-panel {
   display: none;
-  width: 100%;
-  padding-top: 0.75rem;
-  margin-top: 0.5rem;
-  border-top: 1px solid var(--color-border);
-  font-family: var(--font-body);
-  font-weight: 400;
-  font-size: 0.875rem;
-  color: var(--color-muted);
-  line-height: 1.7;
+  margin-top: 1.25rem;
+  padding: 1.25rem 1.5rem;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: var(--radius-md);
+  animation: fadeUp 0.3s ease both;
 }
-.selector__option.open .selector__dropdown { display: block; }
+.pz-panel.visible { display: block; }
+.pz-panel__title { font-family: var(--font-display); font-weight: 700; font-size: 1rem; margin-bottom: 0.5rem; }
+.pz-panel__desc { font-size: 0.875rem; color: var(--color-muted); line-height: 1.75; margin-bottom: 1rem; }
 </style>
 </head>
 <body>
@@ -90,45 +73,69 @@
         Wij implementeren AI voor en met iedereen.
       </p>
 
-      <!-- DOELGROEP DROPDOWN -->
-      <div class="hero__selector">
+      <!-- PUZZEL DOELGROEPEN -->
+      <div class="puzzle-selector">
         <div class="selector__label">Ik ben een...</div>
-        <div class="selector__options">
-          <div class="selector__option" onclick="toggleDropdown(this)" data-target="mkb">
-            <span class="selector__icon">🏢</span> MKB & ondernemer <span class="selector__arrow">▾</span>
-            <div class="selector__dropdown">
-              <p>Meer doen met minder mensen. Wij automatiseren processen en bouwen tools zodat jij je kunt richten op groei.</p>
-              <a href="#contact" class="btn btn--primary" style="margin-top:1rem; font-size:0.85rem; padding:0.6rem 1.4rem;">Gratis kennismaken ↗</a>
-            </div>
-          </div>
-          <div class="selector__option" onclick="toggleDropdown(this)" data-target="productie">
-            <span class="selector__icon">🏭</span> Productiebedrijf <span class="selector__arrow">▾</span>
-            <div class="selector__dropdown">
-              <p>Machines koppelen aan je ERP, real-time inzicht in je productielijn en slimmere planning — wij maken het mogelijk.</p>
-              <a href="#contact" class="btn btn--primary" style="margin-top:1rem; font-size:0.85rem; padding:0.6rem 1.4rem;">Gratis kennismaken ↗</a>
-            </div>
-          </div>
-          <div class="selector__option" onclick="toggleDropdown(this)" data-target="school">
-            <span class="selector__icon">🎓</span> School of instelling <span class="selector__arrow">▾</span>
-            <div class="selector__dropdown">
-              <p>AI-educatie voor leerlingen, docenten en directie. Praktische workshops die direct toepasbaar zijn in de klas.</p>
-              <a href="#contact" class="btn btn--primary" style="margin-top:1rem; font-size:0.85rem; padding:0.6rem 1.4rem;">Gratis kennismaken ↗</a>
-            </div>
-          </div>
-          <div class="selector__option" onclick="toggleDropdown(this)" data-target="startup">
-            <span class="selector__icon">🚀</span> Startup of scale-up <span class="selector__arrow">▾</span>
-            <div class="selector__dropdown">
-              <p>Snel schalen met de juiste technologie. Wij bouwen mee als technische partner zonder dat je een heel dev-team nodig hebt.</p>
-              <a href="#contact" class="btn btn--primary" style="margin-top:1rem; font-size:0.85rem; padding:0.6rem 1.4rem;">Gratis kennismaken ↗</a>
-            </div>
-          </div>
-          <div class="selector__option" onclick="toggleDropdown(this)" data-target="zzp">
-            <span class="selector__icon">💡</span> ZZP'er of freelancer <span class="selector__arrow">▾</span>
-            <div class="selector__dropdown">
-              <p>AI als persoonlijke assistent. Wij leren je de tools die je productiviteit verdubbelen — zodat jij meer kunt doen in minder tijd.</p>
-              <a href="#contact" class="btn btn--primary" style="margin-top:1rem; font-size:0.85rem; padding:0.6rem 1.4rem;">Gratis kennismaken ↗</a>
-            </div>
-          </div>
+
+        <!--
+          SVG viewBox: 0 0 530 298
+          3 stukken rij 1 (elk 170×140), gap 10 → totaal 530 breed
+          2 stukken rij 2 (elk 170×140), gecentreerd, offset 90, gap 10
+          Nub diepte: 16px, nub breedte: 36px
+        -->
+        <svg class="pz-svg" viewBox="0 0 530 298" xmlns="http://www.w3.org/2000/svg" role="group" aria-label="Kies je doelgroep">
+
+          <!-- P1: MKB — rechts tab uit, onder tab uit -->
+          <g class="pz-piece" onclick="pickPz(0)" role="button" aria-label="MKB en ondernemer" tabindex="0">
+            <path class="pz-shape" d="M0,0 L170,0 L170,52 C186,52 186,88 170,88 L170,140 L103,140 C103,156 67,156 67,140 L0,140 Z"
+                  fill="#10B981" fill-opacity="0.15" stroke="#10B981" stroke-width="1.5" stroke-linejoin="round"/>
+            <text x="85" y="52" text-anchor="middle" font-size="26" style="user-select:none">🏢</text>
+            <text x="85" y="76" text-anchor="middle" font-size="11.5" fill="#E2E8F0" font-family="Space Grotesk,sans-serif" font-weight="700" style="user-select:none">MKB &amp;</text>
+            <text x="85" y="92" text-anchor="middle" font-size="11.5" fill="#94A3B8" font-family="Space Grotesk,sans-serif" font-weight="600" style="user-select:none">ondernemer</text>
+          </g>
+
+          <!-- P2: Productie — links socket, rechts tab uit, onder socket -->
+          <g class="pz-piece" onclick="pickPz(1)" role="button" aria-label="Productiebedrijf" tabindex="0" transform="translate(180,0)">
+            <path class="pz-shape" d="M0,0 L170,0 L170,52 C186,52 186,88 170,88 L170,140 L103,140 C103,124 67,124 67,140 L0,140 L0,88 C16,88 16,52 0,52 Z"
+                  fill="#2563EB" fill-opacity="0.15" stroke="#2563EB" stroke-width="1.5" stroke-linejoin="round"/>
+            <text x="85" y="52" text-anchor="middle" font-size="26" style="user-select:none">🏭</text>
+            <text x="85" y="76" text-anchor="middle" font-size="11.5" fill="#E2E8F0" font-family="Space Grotesk,sans-serif" font-weight="700" style="user-select:none">Productie-</text>
+            <text x="85" y="92" text-anchor="middle" font-size="11.5" fill="#94A3B8" font-family="Space Grotesk,sans-serif" font-weight="600" style="user-select:none">bedrijf</text>
+          </g>
+
+          <!-- P3: School — links socket, onder tab uit -->
+          <g class="pz-piece" onclick="pickPz(2)" role="button" aria-label="School of instelling" tabindex="0" transform="translate(360,0)">
+            <path class="pz-shape" d="M0,0 L170,0 L170,140 L103,140 C103,156 67,156 67,140 L0,140 L0,88 C16,88 16,52 0,52 Z"
+                  fill="#F59E0B" fill-opacity="0.15" stroke="#F59E0B" stroke-width="1.5" stroke-linejoin="round"/>
+            <text x="85" y="52" text-anchor="middle" font-size="26" style="user-select:none">🎓</text>
+            <text x="85" y="76" text-anchor="middle" font-size="11.5" fill="#E2E8F0" font-family="Space Grotesk,sans-serif" font-weight="700" style="user-select:none">School &amp;</text>
+            <text x="85" y="92" text-anchor="middle" font-size="11.5" fill="#94A3B8" font-family="Space Grotesk,sans-serif" font-weight="600" style="user-select:none">instelling</text>
+          </g>
+
+          <!-- P4: Startup — boven socket, rechts tab uit -->
+          <g class="pz-piece" onclick="pickPz(3)" role="button" aria-label="Startup of scale-up" tabindex="0" transform="translate(90,158)">
+            <path class="pz-shape" d="M0,0 L67,0 C67,16 103,16 103,0 L170,0 L170,52 C186,52 186,88 170,88 L170,140 L0,140 Z"
+                  fill="#7C3AED" fill-opacity="0.15" stroke="#7C3AED" stroke-width="1.5" stroke-linejoin="round"/>
+            <text x="85" y="52" text-anchor="middle" font-size="26" style="user-select:none">🚀</text>
+            <text x="85" y="76" text-anchor="middle" font-size="11.5" fill="#E2E8F0" font-family="Space Grotesk,sans-serif" font-weight="700" style="user-select:none">Startup &amp;</text>
+            <text x="85" y="92" text-anchor="middle" font-size="11.5" fill="#94A3B8" font-family="Space Grotesk,sans-serif" font-weight="600" style="user-select:none">scale-up</text>
+          </g>
+
+          <!-- P5: ZZP — boven socket, links socket -->
+          <g class="pz-piece" onclick="pickPz(4)" role="button" aria-label="ZZP'er of freelancer" tabindex="0" transform="translate(270,158)">
+            <path class="pz-shape" d="M0,0 L67,0 C67,16 103,16 103,0 L170,0 L170,140 L0,140 L0,88 C16,88 16,52 0,52 Z"
+                  fill="#FF6B6B" fill-opacity="0.15" stroke="#FF6B6B" stroke-width="1.5" stroke-linejoin="round"/>
+            <text x="85" y="52" text-anchor="middle" font-size="26" style="user-select:none">💡</text>
+            <text x="85" y="76" text-anchor="middle" font-size="11.5" fill="#E2E8F0" font-family="Space Grotesk,sans-serif" font-weight="700" style="user-select:none">ZZP'er &amp;</text>
+            <text x="85" y="92" text-anchor="middle" font-size="11.5" fill="#94A3B8" font-family="Space Grotesk,sans-serif" font-weight="600" style="user-select:none">freelancer</text>
+          </g>
+
+        </svg>
+
+        <div class="pz-panel" id="pzPanel">
+          <div class="pz-panel__title" id="pzTitle"></div>
+          <div class="pz-panel__desc" id="pzDesc"></div>
+          <a href="#contact" class="btn btn--primary" style="font-size:0.85rem; padding:0.6rem 1.4rem;">Gratis kennismaken ↗</a>
         </div>
       </div>
 
@@ -412,12 +419,35 @@
 <script src="script.js"></script>
 <script>
 
-// DOELGROEP DROPDOWN
-function toggleDropdown(el) {
-  const isOpen = el.classList.contains('open');
-  document.querySelectorAll('.selector__option').forEach(o => o.classList.remove('open'));
-  if (!isOpen) el.classList.add('open');
+// PUZZEL DOELGROEP SELECTOR
+const PZ_DATA = [
+  { color: '#10B981', title: 'MKB & ondernemer', desc: 'Meer doen met minder mensen. Wij automatiseren processen en bouwen tools zodat jij je kunt richten op groei.' },
+  { color: '#2563EB', title: 'Productiebedrijf',  desc: 'Machines koppelen aan je ERP, real-time inzicht in je productielijn en slimmere planning — wij maken het mogelijk.' },
+  { color: '#F59E0B', title: 'School & instelling', desc: 'AI-educatie voor leerlingen, docenten en directie. Praktische workshops die direct toepasbaar zijn in de klas.' },
+  { color: '#7C3AED', title: 'Startup & scale-up', desc: 'Snel schalen met de juiste technologie. Wij bouwen mee als technische partner zonder dat je een heel dev-team nodig hebt.' },
+  { color: '#FF6B6B', title: "ZZP'er & freelancer", desc: 'AI als persoonlijke assistent. Wij leren je de tools die je productiviteit verdubbelen — zodat jij meer kunt doen in minder tijd.' },
+];
+
+function pickPz(idx) {
+  const pieces = document.querySelectorAll('.pz-piece');
+  pieces.forEach((p, i) => p.classList.toggle('active', i === idx));
+  const d = PZ_DATA[idx];
+  const panel = document.getElementById('pzPanel');
+  document.getElementById('pzTitle').textContent = d.title;
+  document.getElementById('pzTitle').style.color = d.color;
+  document.getElementById('pzDesc').textContent = d.desc;
+  panel.style.borderColor = d.color + '33';
+  panel.classList.add('visible');
 }
+
+// Keyboard support voor puzzelstukken
+document.addEventListener('keydown', e => {
+  if ((e.key === 'Enter' || e.key === ' ') && document.activeElement.closest('.pz-piece')) {
+    e.preventDefault();
+    const pieces = Array.from(document.querySelectorAll('.pz-piece'));
+    pickPz(pieces.indexOf(document.activeElement.closest('.pz-piece')));
+  }
+});
 
 // NAV SCROLL
 const nav = document.getElementById('nav');
