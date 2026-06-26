@@ -114,3 +114,32 @@ body { min-height: 100vh; }
 @keyframes float { from { transform: translateY(110vh) rotate(0deg); } to { transform: translateY(-20vh) rotate(360deg); } }
 
 main { position: relative; z-index: 1; }
+
+/* ── MOBILE ── */
+@media (max-width: 640px) {
+  .header { padding: 1.5rem 1rem 1rem; }
+  .header__title { font-size: clamp(1.4rem, 7vw, 2rem); }
+  .header__sub { font-size: 0.875rem; margin-bottom: 1.25rem; }
+
+  .progress-wrap { padding: 0 1rem; }
+
+  .board {
+    grid-template-columns: repeat(2, 1fr);
+    margin: 1rem auto;
+    padding: 0 0.75rem;
+  }
+
+  /* 3×2 → 2×3: 6 pieces in 2 columns, last piece spans full width */
+  .piece { padding: 1rem 0.9rem; }
+  .piece:last-child { grid-column: 1 / -1; }
+
+  .piece__icon { width: 36px; height: 36px; }
+  .piece__question { font-size: 0.9rem; }
+  .piece__hint, .piece__tap { font-size: 0.75rem; }
+  .piece__explain { font-size: 0.8rem; }
+  .piece__example { font-size: 0.78rem; padding: 0.6rem 0.75rem; }
+
+  .robot-complete__img { width: 100px; height: 100px; }
+  .robot-bubble { padding: 1rem 1.25rem; }
+  .robot-bubble__text { font-size: 0.875rem; }
+}
