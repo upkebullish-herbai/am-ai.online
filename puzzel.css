@@ -217,18 +217,11 @@ main { position: relative; z-index: 1; }
   .mq-dot--active { width: 18px; border-radius: 4px; background: var(--color-white); }
   .mq-dot--done { background: #10B981; }
 
-  /* ── 3D flip scene ── */
-  .mq-scene { perspective: 900px; height: 380px; margin-bottom: 0; }
-  .mq-card {
-    width: 100%; height: 100%; position: relative;
-    transform-style: preserve-3d;
-    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .mq-card.flipped { transform: rotateY(180deg); }
+  /* ── Flip scene — geen preserve-3d (werkt niet op iOS Safari) ── */
+  .mq-scene { height: auto; min-height: 340px; margin-bottom: 0; }
+  .mq-card  { width: 100%; position: relative; }
 
   .mq-front, .mq-back {
-    position: absolute; inset: 0;
-    backface-visibility: hidden; -webkit-backface-visibility: hidden;
     border-radius: 20px;
     padding: 1.4rem 1.25rem 1.25rem;
     display: flex; flex-direction: column; gap: 0.6rem;
@@ -240,10 +233,16 @@ main { position: relative; z-index: 1; }
     content: ''; position: absolute; top: 0; left: 0; right: 0; height: 4px;
     background: var(--piece-color); border-radius: 20px 20px 0 0;
   }
-  .mq-back {
-    transform: rotateY(180deg);
-    border-color: var(--piece-color);
-    overflow-y: auto;
+  /* Back verborgen totdat kaart geflippt is */
+  .mq-back { display: none; border-color: var(--piece-color); }
+  .mq-card.flipped .mq-front { display: none; }
+  .mq-card.flipped .mq-back  {
+    display: flex;
+    animation: mqFlipIn 0.35s ease both;
+  }
+  @keyframes mqFlipIn {
+    from { opacity: 0; transform: rotateY(-12deg) scale(0.97); }
+    to   { opacity: 1; transform: rotateY(0)  scale(1); }
   }
 
   /* Front content */
